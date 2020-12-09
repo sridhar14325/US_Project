@@ -1,470 +1,474 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--  <meta name="viewport" content="width=device-width, initial-scale=1">  -->
-  <title>DHEC</title>
-  <meta name="keywords" itemprop="keywords" content="GIS Mapping" />
-  <meta name="description" itemprop="description" content="Midway Media" />
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1">  -->
+    <title>DHEC</title>
+    <meta name="keywords" itemprop="keywords" content="GIS Mapping" />
+    <meta name="description" itemprop="description" content="Midway Media" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-  <link href="style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-    rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
 
-  <!--     <link rel="stylesheet" href="https://js.arcgis.com/3.32/dijit/themes/claro/claro.css"> -->
-  <link rel="stylesheet" href="https://js.arcgis.com/3.32/esri/css/esri.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="./slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
-  <link href="style.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-  </script>
-  <script src="./slick/slick.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/4.17/dijit/themes/claro/claro.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="./slick/slick.js" type="text/javascript"></script>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="main-logo" href="#"><span><img src="images/logo.png"></span></a>
-    <a class="navbar-brand textLogo" href="#"><img src="images/logo1.png"> Environmental Public Notices</a>
-    <!--  <a class="textLogo mr-5">
-      SDG&E Interconnection Map
-    </a> -->
+<body class="claro">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="main-logo" href="#"><span><img src="images/logo.png"></span></a>
+        <a class="navbar-brand textLogo" href="#"><img src="images/logo1.png"> Environmental Public Notices</a>
+        <!--  <a class="textLogo mr-5">
+          SDG&E Interconnection Map
+        </a> -->
 
-    <div class="input-group mb-3 searchBox ml-auto">
-      <form class="input-group">
-        <input type=" text" class="form-control" placeholder="Find Address or Place" aria-label="Username"
-          aria-describedby="basic-addon1">
-        <div class="input-group-append searchBtn">
-          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <div class="input-group mb-3 searchBox ml-auto">
+            <form class="input-group">
+                <input type="text" class="form-control" placeholder="Find Address or Place" aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <div class="input-group-append searchBtn">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+            </form>
+            <div class="searchResults active">
+                <h3>Search Results <button class="closeSearch"><i class="fas fa-times"></i></button></h3>
+                <ul>
+                    <li><a href="#">2600 Bull St, Columbia, South Croline, 26201</a></li>
+                    <li><a href="#">Bull St, Columbia, South Croline, 26201</a></li>
+                    <li><a href="#">2600 Bull St, Columbia, South Croline, 26201</a></li>
+                    <li><a href="#">Columbia, South Croline, 26201</a></li>
+                </ul>
+            </div>
         </div>
-      </form>
-      <div class="searchResults active">
-        <h3>Search Results <button class="closeSearch"><i class="fas fa-times"></i></button></h3>
-        <ul>
-          <li><a href="#">2600 Bull St, Columbia, South Croline, 26201</a></li>
-          <li><a href="#">Bull St, Columbia, South Croline, 26201</a></li>
-          <li><a href="#">2600 Bull St, Columbia, South Croline, 26201</a></li>
-          <li><a href="#">Columbia, South Croline, 26201</a></li>
-        </ul>
-      </div>
-    </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse mainMenu" id="navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mainMenu" id="navbarSupportedContent">
 
-
-      <!-- <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">About </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us </a>
-        </li>
-        <li class="nav-item dropdown profileBtn">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle"></i>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-      </ul> -->
-      <!--  <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-    </div>
-  </nav>
-  <section class="mainContainer">
-
-    <!-- <div class="leftOverlay">
-      <div class="header">Title Goes Here</div>
-      <div class="contentBox">
-        adadda
-      </div>
-      <button class="leftTogglePanelBtn"> <i class="fas fa-ellipsis-v"></i> </button>
-
-      <div class="leftDynTabs d-flex">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
-            aria-controls="v-pills-first" aria-selected="false"><i class="fas fa-list-ul"></i></a>
-          <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
-            aria-controls="v-pills-two" aria-selected="false"><i class="fas fa-layer-group"></i></a>
-          <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
-            aria-controls="v-pills-three" aria-selected="true"><i class="fas fa-info-circle"></i></a>
-          <a class="nav-link" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
-            aria-controls="v-pills-four" aria-selected="false"><i class="fas fa-share-square"></i></a>
+            <!-- <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us </a>
+              </li>
+              <li class="nav-item dropdown profileBtn">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul> -->
+            <!--  <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
         </div>
-        <div class="tab-content flex-1" id="v-pills-tabContent">
-          <div class="tab-pane fade show active" id="v-pills-first" role="tabpanel" aria-labelledby="v-pills-first-tab">
-            <div class="header">
-              <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
-              
-            </div>
-            <div class="innerTab">
-              a
-            </div>
+    </nav>
+    <section class="mainContainer">
+
+        <!-- <div class="leftOverlay">
+          <div class="header">Title Goes Here</div>
+          <div class="contentBox">
+            adadda
           </div>
-          <div class="tab-pane fade" id="v-pills-two" role="tabpanel" aria-labelledby="v-pills-two-tab">
-            <div class="header">
-              <h3>Layer List</h3>
-              
+          <button class="leftTogglePanelBtn"> <i class="fas fa-ellipsis-v"></i> </button>
+
+          <div class="leftDynTabs d-flex">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
+                aria-controls="v-pills-first" aria-selected="false"><i class="fas fa-list-ul"></i></a>
+              <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
+                aria-controls="v-pills-two" aria-selected="false"><i class="fas fa-layer-group"></i></a>
+              <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
+                aria-controls="v-pills-three" aria-selected="true"><i class="fas fa-info-circle"></i></a>
+              <a class="nav-link" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
+                aria-controls="v-pills-four" aria-selected="false"><i class="fas fa-share-square"></i></a>
             </div>
-            <div class="innerTab">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" value="">SDG&E Services Territory
-                </label>
-              </div>
-              <hr>
-              <div class="box">
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">ICA/LCA Layers
-                  </label>
+            <div class="tab-content flex-1" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-first" role="tabpanel" aria-labelledby="v-pills-first-tab">
+                <div class="header">
+                  <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
+
                 </div>
-                <hr>
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">Generation Capacity
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">Load Capacity
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">Substations
-                  </label>
+                <div class="innerTab">
+                  a
                 </div>
               </div>
-              <div class="box mt-3">
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">DDOR/LNBA Layer
-                  </label>
+              <div class="tab-pane fade" id="v-pills-two" role="tabpanel" aria-labelledby="v-pills-two-tab">
+                <div class="header">
+                  <h3>Layer List</h3>
+
                 </div>
-                <hr>
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">Planned Investment
-                  </label>
+                <div class="innerTab">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="">SDG&E Services Territory
+                    </label>
+                  </div>
+                  <hr>
+                  <div class="box">
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">ICA/LCA Layers
+                      </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">Generation Capacity
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">Load Capacity
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">Substations
+                      </label>
+                    </div>
+                  </div>
+                  <div class="box mt-3">
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">DDOR/LNBA Layer
+                      </label>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">Planned Investment
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
+                        <input type="checkbox" class="form-check-input" value="">Candidate Defferal
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-check">
-                  <label class="form-check-label pt-1 pr-2 pl-2 pb-1">
-                    <input type="checkbox" class="form-check-input" value="">Candidate Defferal
-                  </label>
+              </div>
+              <div class="tab-pane fade" id="v-pills-three" role="tabpanel" aria-labelledby="v-pills-three-tab">
+                <div class="header">
+                  <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
+
+                </div>
+                <div class="innerTab">
+                  a
+                </div>
+              </div>
+              <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
+                <div class="header">
+                  <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
+
+                </div>
+                <div class="innerTab">
+                  a
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="v-pills-three" role="tabpanel" aria-labelledby="v-pills-three-tab">
-            <div class="header">
-              <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
-              
-            </div>
-            <div class="innerTab">
-              a
-            </div>
-          </div>
-          <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
-            <div class="header">
-              <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Panel Title</h3>
-              
-            </div>
-            <div class="innerTab">
-              a
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <div id="viewDiv" class="mapView rightPanelOpened"></div>
+        </div> -->
+        <div id="viewDiv" class="mapView rightPanelOpened"></div>
 
-    <div class="rightOverlay">
-      <!-- <div class="header"><button class="closeRightPanel"><i class="fas fa-times"></i></button> Title Goes Here</div>
-      <div class="contentBox"> -->
-      <div class="tab-content flex-1" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-first" role="tabpanel" aria-labelledby="v-pills-first-tab">
-          <div class="header">
-            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Pointing</h3>
-          </div>
-          <div class="innerTab">
-            Content Goes here
-          </div>
-        </div>
-        <div class="tab-pane fade" id="v-pills-two" role="tabpanel" aria-labelledby="v-pills-two-tab">
-          <div class="header">
-            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Base Map Gallery</h3>
-          </div>
-          <div class="innerTab">
-            xadx
-          </div>
-        </div>
-        <div class="tab-pane fade" id="v-pills-three" role="tabpanel" aria-labelledby="v-pills-three-tab">
-          <div class="header">
-            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Share </h3>
-          </div>
-          <div class="innerTab">
-            a
-          </div>
-        </div>
-        <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
-          <div class="header">
-            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Quetions</h3>
-          </div>
-          <div class="innerTab">
-            a
-          </div>
-        </div>
-      </div>
-      <!-- </div> -->
-      <!-- <button class="rightTogglePanelBtn"> <i class="fas fa-ellipsis-v"></i> </button> -->
+        <div class="rightOverlay">
+            <!-- <div class="header"><button class="closeRightPanel"><i class="fas fa-times"></i></button> Title Goes Here</div>
+            <div class="contentBox"> -->
+            <div class="tab-content flex-1" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-first" role="tabpanel" aria-labelledby="v-pills-first-tab">
+                    <div class="header">
+                        <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Pointing</h3>
+                    </div>
+                    <div class="innerTab">
+                        Content Goes here
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-two" role="tabpanel" aria-labelledby="v-pills-two-tab">
+                    <div class="header">
+                        <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Base Map Gallery</h3>
+                    </div>
+                    <div class="innerTab">
+                        xadx
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-three" role="tabpanel" aria-labelledby="v-pills-three-tab">
+                    <div class="header">
+                        <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Share </h3>
+                    </div>
+                    <div class="innerTab">
+                        a
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
+                    <div class="header">
+                        <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Quetions</h3>
+                    </div>
+                    <div class="innerTab">
+                        a
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <!-- <button class="rightTogglePanelBtn"> <i class="fas fa-ellipsis-v"></i> </button> -->
 
-      <div class="right-tabs">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active-" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
-            aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a>
-          <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
-            aria-controls="v-pills-two" aria-selected="false"><img src="images/basemap-icon.png"></a>
-          <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
-            aria-controls="v-pills-three" aria-selected="true"><img src="images/share-icon.png"></a>
-          <a class="nav-link" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
-            aria-controls="v-pills-four" aria-selected="false"><img src="images/qn-icon.png"></a>
+            <div class="right-tabs">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active-" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
+                       aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a>
+                    <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
+                       aria-controls="v-pills-two" aria-selected="false"><img src="images/basemap-icon.png"></a>
+                    <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
+                       aria-controls="v-pills-three" aria-selected="true"><img src="images/share-icon.png"></a>
+                    <a class="nav-link" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
+                       aria-controls="v-pills-four" aria-selected="false"><img src="images/qn-icon.png"></a>
+                </div>
+            </div>
+            <div class="baseMapToggle"><img id="SwitchView" src="images/map.png"></div>
         </div>
-      </div>
-      <div class="baseMapToggle"><img src="images/map.png"></div>
+
+    </section>
+
+
+    <footer class="footerGrid ui-widget-content">
+        <button class="footerGridToggleBtn"><i class="fas fa-ellipsis-h"></i></button>
+        <!-- <div class="header">
+          <h4>Title Goes here</h4>
+        </div> -->
+        <div class="contentSec">
+            <div class="footer-result">
+                <div>
+                    <div class="box">
+                        <h2>
+                            <span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
+                        </h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h2>
+                            <span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
+                        </h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h2>
+                            <span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
+                        </h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h2><span class="logo"><img src="images/search-result/BW.png"></span> Bureau Of Water</h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h2>
+                            <span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
+                        </h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="box">
+                        <h2>
+                            <span class="logo"><img src="images/search-result/OC.png"></span> Division of Ocean & Coastal Resource
+                            Management
+                        </h2>
+                        <ul>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                            <li><a href="">Link textgoes here</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button> -->
+    <div class="modal fade design2" id="desclaimer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Disclaimer</h5>
+                    <!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                    <div class="discLogo"><img src="images/logo.svg"></div>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                        anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore.
+                    </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            I Accept the Terms
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn discAcceptBtn mx-auto btn-outline-success"
+                            data-dismiss="modal">
+                        Accept
+                    </button>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-  </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 
-  <footer class="footerGrid ui-widget-content">
-    <button class="footerGridToggleBtn"><i class="fas fa-ellipsis-h"></i></button>
-    <!-- <div class="header">
-      <h4>Title Goes here</h4>
-    </div> -->
-    <div class="contentSec">
-      <div class="footer-result">
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
-            </h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
-            </h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
-            </h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/BW.png"></span> Bureau Of Water</h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/LW.png"></span> Bureau of land and waste management
-            </h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="box">
-            <h2><span class="logo"><img src="images/search-result/OC.png"></span> Division of Ocean & Coastal Resource
-              Management</h2>
-            <ul>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-              <li><a href="">Link textgoes here</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- Modal -->
-  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
-  <div class="modal fade design2" id="desclaimer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Disclaimer</h5>
-          <!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
-          <div class="discLogo"><img src="images/logo.svg"></div>
-        </div>
-        <div class="modal-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore.</p>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              I Accept the Terms
-            </label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <!--         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <button type="button" class="btn discAcceptBtn mx-auto btn-outline-success"
-            data-dismiss="modal">Accept</button>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+        var app_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/"));
+        var dojoConfig = {
+            locale: location.search.substring(1) === "" ? "en-us" : location.search.substring(1),
+            packages: [{
+                name: "widgets",
+                location: app_path + '/widgets/'
+            }],
+            parseOnLoad: false
+        };
+    </script>
+    <script src="https://js.arcgis.com/4.17/"></script>
+    <script src="config/config.js"></script>
+    <script src="config/initmap.js"></script>
 
-        </div>
-      </div>
-    </div>
-  </div>
+    <script type="text/javascript">
+        // $(".rightTogglePanelBtn").click(function () {
+        //   $(".rightOverlay").toggleClass("active");
+        //   $(".mapView").toggleClass("rightPanelOpened");
+        // });
 
+        // $(".leftTogglePanelBtn").click(function () {
+        //   $(".leftOverlay").toggleClass("active");
+        // });
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        // $(".closeBtn").click(function () {
+        //   $(".tab-content .tab-pane").removeClass("show active");
+        //   $(".leftDynTabs .nav > .nav-link").removeClass("active");
+        // });
 
-
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-  </script>
-  <!--   <script>
-        require(["dojo/topic", "dojo/dom-construct", "dojo/i18n!widgets/nls/strings", "dojo/domReady!"], function (topic, domConst, _i18n) {
+        $(".rightOverlay .right-tabs .nav-pills .nav-link").click(function () {
+            $(".rightOverlay").addClass("active");
+            $(".mapView").removeClass("rightPanelOpened");
+            $(".searchResults").removeClass("active");
         });
-    </script> -->
+        $(".closeRightPanel").click(function () {
+            $(".rightOverlay").removeClass("active");
+            $(".mapView").addClass("rightPanelOpened");
+            $(".rightOverlay .right-tabs .nav-pills .nav-link").removeClass("active");
 
-  <!-- <script src="js/custom-js.js"></script>  -->
-  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+        });
+    </script>
 
-  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-  <script src="js/arcgis-init.js" type="text/javascript"></script>
-  <script>
-    require(["esri/map", "dojo/dom", "dojo/domReady!"], function (Map, dom) {
-      var map = new Map("viewDiv", {
-        center: [34.543896, 69.160652],
-        zoom: 6,
-        logo: false,
-        basemap: "streets"
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-    // $(".rightTogglePanelBtn").click(function () {
-    //   $(".rightOverlay").toggleClass("active");
-    //   $(".mapView").toggleClass("rightPanelOpened");
-    // });
-
-    // $(".leftTogglePanelBtn").click(function () {
-    //   $(".leftOverlay").toggleClass("active");
-    // });
-
-    // $(".closeBtn").click(function () {
-    //   $(".tab-content .tab-pane").removeClass("show active");
-    //   $(".leftDynTabs .nav > .nav-link").removeClass("active");
-    // });
-
-    $(".rightOverlay .right-tabs .nav-pills .nav-link").click(function () {
-      $(".rightOverlay").addClass("active");
-      $(".mapView").removeClass("rightPanelOpened");
-      $(".searchResults").removeClass("active");
-    });
-    $(".closeRightPanel").click(function () {
-      $(".rightOverlay").removeClass("active");
-      $(".mapView").addClass("rightPanelOpened");
-      $(".rightOverlay .right-tabs .nav-pills .nav-link").removeClass("active");
-
-    });
-  </script>
-
-  <script type="text/javascript">
-    //Footer grid
-    $(".footerGridToggleBtn").click(function () {
-      $(".footerGrid").toggleClass("active");
-    });
+    <script type="text/javascript">
+        //Footer grid
+        $(".footerGridToggleBtn").click(function () {
+            $(".footerGrid").toggleClass("active");
+        });
 
 
-    //Search Result grid
-    $(".searchBox .searchBtn").click(function () {
-      $(".searchResults").addClass("active");
-    });
-    $(".searchResults  h3 .closeSearch").click(function () {
-      $(".searchResults").removeClass("active");
+        //Search Result grid
+        $(".searchBox .searchBtn").click(function () {
+            $(".searchResults").addClass("active");
+        });
+        $(".searchResults  h3 .closeSearch").click(function () {
+            $(".searchResults").removeClass("active");
 
-    });
+        });
 
     // $(function () {
     //   $('.footerGrid').resizable({
@@ -472,44 +476,42 @@
     //     minHeight: 220
     //   });
     // });
-  </script>
-  <!-- <script>
-    $(document).ready(function () {
-      $("#desclaimer").modal('show');
-    });
-  </script> -->
-
-
-  <!-- Footer Slick carousal -->
-  <script>
-    $('.footer-result').slick({
-      dots: false,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [{
-          breakpoint: 1025,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
-      ]
-    });
-  </script>
+    </script>
+    <!-- <script>
+      $(document).ready(function () {
+        $("#desclaimer").modal('show');
+      });
+    </script> -->
+    <!-- Footer Slick carousal -->
+    <script>
+        $('.footer-result').slick({
+            dots: false,
+            infinite: false,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [{
+                breakpoint: 1025,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+    </script>
 </body>
 
 </html>
