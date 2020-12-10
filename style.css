@@ -398,6 +398,7 @@ opacity: 1;
     align-items: center;
 }
 .baseMapToggle {
+    background: #4a4848;
     position: absolute;
     right: calc(100% + 15px);
     bottom: 15px;
@@ -407,6 +408,7 @@ opacity: 1;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
     overflow: hidden;
     border: 2px solid #fff;
+    padding: 10px;
 }
 .baseMapToggle img {
 width: 100%;
