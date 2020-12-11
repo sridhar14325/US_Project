@@ -1,6 +1,6 @@
 ﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView",
-    "widgets/Navigation/Navigation",
-    "dojo/domReady!"], function (Parser, Map, MapView, SceneView, Navigation) {
+    "widgets/BaseMapGallery/BaseMapGallery",
+    "dojo/domReady!"], function (Parser, Map, MapView, SceneView, BaseMapGallery) {
 
         //Parser.parse();
         //https://codepen.io/pen?editors=1000   //check for switching 2D-3D
@@ -8,8 +8,11 @@
         configOptions.Global.currentMap = map;
 
         function initializeWidgets() {
-
-
+            var basemampgallery = new BaseMapGallery({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.BaseMapGallery
+            }, configOptions.widgets.BaseMapGallery.id);
+            basemampgallery.startup();
         };
 
         var initialViewParams = {
@@ -22,18 +25,21 @@
         configOptions.Global.mapView = createView(initialViewParams, "2d");
         configOptions.Global.mapView.map = map;
         configOptions.Global.activeView = configOptions.Global.mapView;
-
+        configOptions.Global.activeView.when(function (result) {
+            initializeWidgets();
+        }, function (er) { console.log(er); });
         // create 3D view, won't initialize until container is set
         initialViewParams.container = null;
         initialViewParams.map = map;
         configOptions.Global.sceneView = createView(initialViewParams, "3d");
 
+        /*
         var switchButton = document.getElementById("SwitchView");
         // switch the view between 2D and 3D each time the button is clicked
         switchButton.addEventListener("click", function () {
             switchView();
         });
-
+       
         // Switches the view from 2D to 3D and vice versa
         function switchView() {
             var is3D = configOptions.Global.activeView.type === "3d";
@@ -70,6 +76,7 @@
             }
             return view;
         }
+         */
     });
 //      Gconfig(Global Configuration)  means get the global configuration inputs
 //      Pconfig(Private Configuration)  means get own widget configuration inputs

@@ -1,5 +1,5 @@
 ﻿configOptions = {
-    
+
     Global: {
         currentMap: null,
         container: "viewDiv",
@@ -12,6 +12,12 @@
             id: "Navigationdiv",
             option: {
             }
+        },
+        BaseMapGallery: {
+            id: "Widget_BasemapGallery",
+            option: {
+            }
         }
+
     }
 };
