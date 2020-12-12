@@ -2,17 +2,17 @@
     "widgets/BaseMapGallery/BaseMapGallery",
     "dojo/domReady!"], function (Parser, Map, MapView, SceneView, BaseMapGallery) {
 
-        //Parser.parse();
-        //https://codepen.io/pen?editors=1000   //check for switching 2D-3D
         var map = new Map({ basemap: "satellite" });
         configOptions.Global.currentMap = map;
 
         function initializeWidgets() {
+            //Installing BaseMap Gallery widget
             var basemampgallery = new BaseMapGallery({
                 map: map, Gconfig: configOptions.Global,
-                Pconfig: configOptions.widgets.BaseMapGallery
+                Pconfig: configOptions.widgets.BaseMapGallery.options
             }, configOptions.widgets.BaseMapGallery.id);
             basemampgallery.startup();
+
         };
 
         var initialViewParams = {
@@ -26,6 +26,7 @@
         configOptions.Global.mapView.map = map;
         configOptions.Global.activeView = configOptions.Global.mapView;
         configOptions.Global.activeView.when(function (result) {
+            //Installing widgets after loading the map view
             initializeWidgets();
         }, function (er) { console.log(er); });
         // create 3D view, won't initialize until container is set
@@ -63,7 +64,7 @@
                 //switchButton.value = "2D";
             }
         }
-
+        */
         // convenience function for creating a 2D or 3D view
         function createView(params, type) {
             var view;
@@ -76,7 +77,7 @@
             }
             return view;
         }
-         */
+
     });
 //      Gconfig(Global Configuration)  means get the global configuration inputs
 //      Pconfig(Private Configuration)  means get own widget configuration inputs
