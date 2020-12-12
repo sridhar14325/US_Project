@@ -50,7 +50,7 @@
           <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
       </form>
-      <div class="searchResults active">
+      <div class="searchResults active-">
         <h3>Search Results <button class="closeSearch"><i class="fas fa-times"></i></button></h3>
         <ul>
           <li><a href="#">2600 Bull St, Columbia, South Croline, 26201</a></li>
@@ -60,10 +60,10 @@
         </ul>
       </div>
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse mainMenu" id="navbarSupportedContent">
 
       <!-- <ul class="navbar-nav ml-auto">
@@ -217,7 +217,7 @@
             <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Base Map Gallery</h3>
           </div>
           <div id="Widget_BasemapGallery">
-            
+
           </div>
         </div>
         <div class="tab-pane fade" id="v-pills-three" role="tabpanel" aria-labelledby="v-pills-three-tab">
@@ -496,6 +496,13 @@
             slidesToScroll: 2,
             infinite: true,
             dots: true
+          }
+        },
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
           }
         },
         {

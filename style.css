@@ -331,6 +331,24 @@ display:block;
 padding:.5rem 0.9rem;
 position: relative;
 }
+.rightOverlay .right-tabs .nav-pills .nav-link:after{
+    content:'';
+    position: absolute;
+    top:100%;
+    left:0;
+    right:0;
+    width: calc(100% - 20px);
+    margin:auto;
+    height: 1px;
+    opacity: 0.5;
+    background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.02) 1%, rgba(255,255,255,1) 49%, rgba(255,255,255,0.96) 51%, rgba(255,255,255,0) 100%);
+background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.02) 1%,rgba(255,255,255,1) 49%,rgba(255,255,255,0.96) 51%,rgba(255,255,255,0) 100%);
+background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.02) 1%,rgba(255,255,255,1) 49%,rgba(255,255,255,0.96) 51%,rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+}
+.rightOverlay .right-tabs .nav-pills .nav-link:last-child:after{
+display: none;
+}
 .rightOverlay .right-tabs .nav-pills .nav-link.active:before {
     content: '';
     position: absolute;
@@ -680,9 +698,9 @@ padding-right: 30px;
     left: 0;
     right: 0;
     width: 60px;
-    background: #ffffff;
+    background: #00b6d6;
     border: 0;
-    color: #555555;
+    color: #ffffff;
     font-size: 2rem;
     line-height: 1rem;
     outline: none;
@@ -698,7 +716,7 @@ padding-right: 30px;
     left: -13px;
     z-index: 99;
     position: absolute;
-    background: #ffffff;
+    background: #00b6d6;
     transform: skew(-19deg, 0deg);
     top: 0;
     pointer-events: none;
@@ -713,7 +731,7 @@ padding-right: 30px;
     right: -13px;
     z-index: 99;
     position: absolute;
-    background: #ffffff;
+    background: #00b6d6;
     transform: skew(19deg, 0deg);
     top: 0;
     pointer-events: none;
@@ -816,25 +834,49 @@ padding-right: 30px;
     color: #555;
     outline: none;
 }
-@media only screen and (max-width: 600px) {
-    .searchBox{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 9;
-    right: 0;
-    margin: auto;
-    margin-top: 15px;
-    max-width: 280px;
+
+@media only screen and (max-width: 991px) {
+    .main-logo {
+        height: calc(100% + 1px);
+        margin-left: -25px;
+        position: absolute;
+        left: 0;
+        top:0;
     }
-    .mapLevels{
-    position: fixed;
-    left: 12px;
-    bottom: 12px;
-    top: auto;
-    right: auto;
+    .navbar .textLogo{
+        margin-left: auto;
     }
-    .rightOverlay.active .rightTogglePanelBtn {
-    top: 52px;
+    .rightOverlay {
+        height: calc(100vh - 112px);
+    }
+}
+@media only screen and (max-width: 767px) {
+    .rightOverlay {
+        height: calc(100vh - 41px);
+    }
+    .searchBox {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 9;
+        right: 0;
+        margin: auto;
+        margin-top: 15px;
+        max-width: calc(100% - 30px);
+    }
+    .main-logo span {
+        padding: 0 5px 0 20px;
+    }
+    .main-logo img {
+        width: 70px;
+    }
+    .navbar .textLogo {
+        margin-left: auto;
+        padding: 0;
+        font-size: 12px;
+        margin-right: 0;
+    }
+    .navbar .textLogo img {
+        width: 40px;
     }
 }
