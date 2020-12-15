@@ -317,13 +317,14 @@
 
       <div class="right-tabs">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active-" id="v-pills-first-tab-" data-toggle="pill-" href="#v-pills-first" role="tab"
-            aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a>
-          <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
+          <!-- <a class="nav-link active" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
+            aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a> -->
+          <a class="nav-link footerPanelToggle" href="javascript:void(0)"><img src="images/focus-icon.png"></a>
+          <a class="nav-link panel-nav" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
             aria-controls="v-pills-two" aria-selected="false"><img src="images/basemap-icon.png"></a>
-          <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
+          <a class="nav-link panel-nav" id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
             aria-controls="v-pills-three" aria-selected="true"><img src="images/share-icon.png"></a>
-          <a class="nav-link" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
+          <a class="nav-link panel-nav" id="v-pills-four-tab" data-toggle="pill" href="#v-pills-four" role="tab"
             aria-controls="v-pills-four" aria-selected="false"><img src="images/qn-icon.png"></a>
         </div>
       </div>
@@ -515,7 +516,7 @@
     //   $(".leftDynTabs .nav > .nav-link").removeClass("active");
     // });
 
-    $(".rightOverlay .right-tabs .nav-pills .nav-link").click(function () {
+    $(".rightOverlay .right-tabs .nav-pills .panel-nav").click(function () {
       $(".rightOverlay").addClass("active");
       $(".mapView").removeClass("rightPanelOpened");
       $(".searchResults").removeClass("active");
@@ -523,14 +524,14 @@
     $(".closeRightPanel").click(function () {
       $(".rightOverlay").removeClass("active");
       $(".mapView").addClass("rightPanelOpened");
-      $(".rightOverlay .right-tabs .nav-pills .nav-link").removeClass("active");
+      $(".rightOverlay .right-tabs .nav-pills .panel-nav").removeClass("active");
 
     });
   </script>
 
   <script type="text/javascript">
     //Footer grid
-    $(".footerGridToggleBtn").click(function () {
+    $(".footerGridToggleBtn, .footerPanelToggle").click(function () {
       $(".footerGrid").toggleClass("active");
     });
 
