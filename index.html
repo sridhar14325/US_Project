@@ -228,12 +228,87 @@
             a
           </div>
         </div>
-        <div class="tab-pane fade" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
+        <div class="tab-pane fade infoPanel" id="v-pills-four" role="tabpanel" aria-labelledby="v-pills-four-tab">
           <div class="header">
-            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Quetions</h3>
+            <h3><button class="closeRightPanel"><i class="fas fa-times"></i></button>Information</h3>
           </div>
           <div class="innerTab">
-            a
+            <h2>About Environmental Public Notice Application:</h2>
+            <p>The SC DHEC <strong>Environmental Public Notice</strong> application helps users discover environmental
+              public
+              notices that exist in their community and obtain information about them. This is a stand alone GIS viewer
+              deployed by DHEC and can be used by citizens and staff on a desktop PC, mobile phone or tablet device.</p>
+            <hr>
+            <h4>Using the Application</h4>
+            <p>The <strong>Environmental Public Notice </strong> application offers a simple way for users to locate
+              public
+              notices and information about the notices near a location of interest. To identify a location, simply
+              click on the map, enter an address in the search box or use your current location. Your searched location
+              will then be displayed on the map and relevant notice information will be presented. </p>
+            <hr>
+            <h4>Finding an Area of Interest</h4>
+            <p>There are three primary ways to identify a search location of interest:
+              <br><br>1) Interact directly with the map by clicking to search based on a particular location
+              <br>2) Use the <strong>Geolocate Button</strong> <img src=images/imgGeolocation.png width="25"
+                height="25" /> to
+              search by your current physical location
+              <br>3) Use the <strong>Geocode Button</strong> <img src=images/locate.png width="25" height="25" /> to
+              search by a
+              specific address</p>
+            <hr>
+            <h4>Notice Information</h4>
+            <p>After searching for a respective location, relevant public notice information will be presented at the
+              bottom of the screen. This information includes a list of the closest public notices and the proximity to
+              each. The tables are sorted by notice type with the closest notices appearing at the top of each list. The
+              different notice types and their display icons are as follows:<br>
+              <br><img src=images/publicNotice_art.png width="25" height="25" /> All Notices
+              <br><img src=images/STATE.png width="25" height="25" /> Statewide
+              <br><img src=images/AQ.png width="25" height="25" /> Bureau of Air Quality
+              <br><img src=images/LW.png width="25" height="25" /> Bureau of Land and Waste Management
+              <br><img src=images/OC.png width="25" height="25" /> Division of Ocean and Coastal Resource Management
+              <br><img src=images/BW.png width="25" height="25" /> Bureau of Water<br><br></p>
+            <a name="bottom"></a>
+            <p>In addition to the information displayed in the tables, the icons on the map contain a popup that lists
+              more specific information about the notice. This popup can be displayed by either clicking on the icon or
+              selecting a record from one of the tables. The following are the attributes displayed in the popup window
+              and a brief description of each:<br>
+              <br><strong><span style="line-height: 150%">Applicant:</strong> Name of the permit applicant of the
+              notice</span>
+              <br><strong><span style="line-height: 150%">Notice Type:</strong> Type of public notice</span>
+              <br><strong><span style="line-height: 150%">Longitude:</strong> Longitude (X) coordinate of the
+              notice</span>
+              <br><strong><span style="line-height: 150%">Latitude:</strong> Latitude (Y) coordinate of the
+              notice</span>
+              <br><strong><span style="line-height: 150%">Location Accuracy:</strong> Specifies the accuracy of the
+              notice
+              location. This is listed as either a specific or generalized location. Specific location indicates that
+              the site is located at a matched address on the map, whereas a generalized location exists at a ZIP Code
+              centroid.</span>
+              <br><strong><span style="line-height: 150%">Notice Location:</strong> Indicates the affected area of the
+              notice. Site specific indicates that the notice only affects the immediate area. Citywide, countywide, and
+              statewide indicates that the notice affects an entire region of South Carolina.</span>
+              <br><strong><span style="line-height: 150%">Start Date:</strong> Start date of the notice</span>
+              <br><strong><span style="line-height: 150%">End Date:</strong> End date of the notice</span>
+              <br><strong>More Info:</strong> Link to detailed information about the notice
+            </p>
+            <hr>
+            <h4>Share Your Map</h4>
+            <p>You can click on the <strong>Share Map Button</strong> <img src=images/imgSocialMedia.png width="25" />
+              to share your map several different ways. You can compose an email, post to your Facebook wall or post a
+              Tweet. When you use the Facebook or Twitter links, you'll be asked to sign in to your respective account.
+            </p>
+            <hr>
+            <h4>CREATING A SHORTCUT ON MOBILE DEVICE HOME SCREENS</h4>
+            <p>
+              <h4><a href="https://gis.dhec.sc.gov/publicnotice/images/RH_Shortcut_Instructions.pdf"
+                  target="_blank"><img src=images/publicNotice_help.png width="100%" style="border:none;" /></a></h4>
+              </ul>
+            </p>
+            <hr>
+            <h4>Browser Compatibility</h4>
+            <p>The <strong>Environmental Public Notice</strong> application is supported on the following browsers:
+              Microsoft IE 7/8/9,10,11 / Microsoft Edge, Mozilla Firefox, Google Chrome, Apple Safari, iOS Safari 4.0+,
+              and Android Chrome 2.3+.</p>
           </div>
         </div>
       </div>
@@ -242,8 +317,8 @@
 
       <div class="right-tabs">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <!-- <a class="nav-link active-" id="v-pills-first-tab" data-toggle="pill" href="#v-pills-first" role="tab"
-            aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a> -->
+          <a class="nav-link active-" id="v-pills-first-tab-" data-toggle="pill-" href="#v-pills-first" role="tab"
+            aria-controls="v-pills-first" aria-selected="false"><img src="images/focus-icon.png"></a>
           <a class="nav-link" id="v-pills-two-tab" data-toggle="pill" href="#v-pills-two" role="tab"
             aria-controls="v-pills-two" aria-selected="false"><img src="images/basemap-icon.png"></a>
           <a class="nav-link " id="v-pills-three-tab" data-toggle="pill" href="#v-pills-three" role="tab"
@@ -252,7 +327,7 @@
             aria-controls="v-pills-four" aria-selected="false"><img src="images/qn-icon.png"></a>
         </div>
       </div>
-      <div class="baseMapToggle"><img src="images/focus-icon.png"></div>
+      <!-- <div class="baseMapToggle"><img src="images/focus-icon.png"></div> -->
     </div>
 
   </section>
