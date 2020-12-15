@@ -1,8 +1,11 @@
-﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView",
-    "widgets/BaseMapGallery/BaseMapGallery",
-    "dojo/domReady!"], function (Parser, Map, MapView, SceneView, BaseMapGallery) {
+﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
+    "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator",
+    "esri/geometry/SpatialReference",
+    "dojo/domReady!"], function (Parser, Map, MapView, SceneView, Extent,
+        BaseMapGallery, Cust_Locator,
+        SpatialReference) {
 
-        var map = new Map({ basemap: "satellite" });
+        var map = new Map({ basemap: configOptions.Global.ApplicationBaseMap });
         configOptions.Global.currentMap = map;
 
         function initializeWidgets() {
@@ -13,13 +16,24 @@
             }, configOptions.widgets.BaseMapGallery.id);
             basemampgallery.startup();
 
+            //Installing Locator widget
+            var cust_locator = new Cust_Locator({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.Locator.options
+            });
+            cust_locator.startup();
+
         };
+        // Set the extent on the view
+        var ext = configOptions.Global.DefaultExtent.split(",");
 
         var initialViewParams = {
             container: "viewDiv",
             map: configOptions.Global.currentMap,
-            center: [76.715899, 30.7167548],
-            zoom: 16
+            //center: [76.715899, 30.7167548],
+            //zoom: 16,
+            extent: new Extent(parseFloat(ext[0]), parseFloat(ext[1]), parseFloat(ext[2]), parseFloat(ext[3]), new SpatialReference({ wkid: 3857 }))
+
         }
         // create 2D view and and set active
         configOptions.Global.mapView = createView(initialViewParams, "2d");

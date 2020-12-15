@@ -3,10 +3,13 @@
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
     "esri/widgets/BasemapGallery",
+    "esri/Basemap", "esri/layers/MapImageLayer",
+    "esri/widgets/BasemapGallery/support/LocalBasemapsSource",
     "dojo/text!widgets/BaseMapGallery/templates/BaseMapGallery.html"
 ],
     function (dom, on, declare, _WidgetBase, _TemplatedMixin,
         BasemapGallery,
+        Basemap, MapImageLayer, LocalBasemapsSource,
         template_BaseMapGallery) {
 
         var BaseMapGallery_widget = declare("widgets.BaseMapGallery", [_WidgetBase, _TemplatedMixin], {
@@ -36,12 +39,55 @@
             startup: function () {
                 var currentWidget = this;
                 try {
+
                     var basemapGallery = new BasemapGallery({
+                        view: currentWidget.Gconfig.activeView,
+                        source: {
+                            portal: {
+                                url: PortUrl,
+                                useVectorBasemaps: false  // Load raster tile basemaps
+                            }
+                        },
+                        container: basemapgallerydiv
+                    });
+                    //currentWidget.PrepareBaseMapLayers();
+                } catch (e) {
+                    console.log(e);
+                }
+            },
+            PrepareBaseMapLayers: function () {
+                var currentWidget = this;
+                try {
+                    var bslayers = currentWidget.Pconfig.BaseMapLayers;
+                    var basemapList = [];
+                    for (var i = 0; i < bslayers.length; i++) {
+                        basemapList.push(new Basemap({
+                            baseLayers: [new MapImageLayer({
+                                url: bslayers[i]["MapURL"]
+                                , id: bslayers[i]["Key"] + "_Basemap"
+                            })],
+                            title: bslayers[i]["Name"],
+                            id: bslayers[i]["Key"],
+                            thumbnailUrl: bslayers[i]["ThumbnailSource"]
+                        }));
+                    }
+                    currentWidget.ReadyBasemapGallery(basemapList)
+                } catch (e) {
+                    console.log("[PrepareBaseMapLayers] failed: " + e);
+                }
+            },
+            ReadyBasemapGallery: function (basemapList) {
+                var currentWidget = this;
+                try {
+                    var basemapGallery = new BasemapGallery({
+                        source: new LocalBasemapsSource({
+                            basemaps: [basemapList]
+                        }),
                         view: currentWidget.Gconfig.activeView,
                         container: basemapgallerydiv
                     });
                 } catch (e) {
-                    console.log(e);
+                    console.log("[ReadyBasemapGallery] failed: " + e);
                 }
             },
             // Below function use to activate the button functionalaties

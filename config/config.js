@@ -1,4 +1,12 @@
-﻿configOptions = {
+﻿var PortUrl = "", instanse = "", AppPath = "", RestServices = "/server/rest/services/";
+var Env = ["Deve", "Test", "Stage", "Prod"];//Enveronment.
+var AppEnv = "Deve";//this for set the deployment enveronment.
+if (AppEnv == "Deve") { PortUrl = "https://www.arcgis.com"; instanse = "arcgis"; AppPath = window.location.origin; }
+else if (AppEnv == "Test") { PortUrl = ""; instanse = "portal"; AppPath = window.location.protocol + window.location.host; }
+else if (AppEnv == "Stage") { PortUrl = ""; instanse = "portal"; AppPath = window.location.protocol + window.location.host; }
+else if (AppEnv == "Prod") { PortUrl = ""; instanse = "portal"; AppPath = window.location.protocol + window.location.host; }
+
+configOptions = {
 
     Global: {
         currentMap: null,
@@ -19,6 +27,7 @@
         ProxyURL: "https://gis.dhec.sc.gov/proxy40/proxy.ashx",
         // Initial map extent. Use comma (,) to separate values and don't delete the last comma.
         DefaultExtent: "-9454742.6334016, 3757687.37008406, -8547171.46647788, 4244429.44843421",
+        ApplicationBaseMap: "topo",
 
         // ------------------------------------------------------------------------------------------------------------------------
         // INFO-POPUP SETTINGS
@@ -85,9 +94,31 @@
         BaseMapGallery: {
             id: "Widget_BasemapGallery",
             options: {
+                BaseMapLayers: [{
+                    Key: "topoMap",
+                    ThumbnailSource: AppPath + "/images/Topographic.jpg",
+                    Name: "Topographic",
+                    MapURL: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"
+                }, {
+                    Key: "streets",
+                    ThumbnailSource: AppPath + "/images/streets.png",
+                    Name: "Streets",
+                    MapURL: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
+                }, {
+                    Key: "natgeo",
+                    ThumbnailSource: AppPath + "/images/nationalgeo.png",
+                    Name: "Nat'l Geographic",
+                    MapURL: "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer"
+                }, {
+
+                    Key: "imageryMap",
+                    ThumbnailSource: AppPath + "/images/imagery.jpg",
+                    Name: "Imagery",
+                    MapURL: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+                }],
             }
         },
-        Locators: {
+        Locator: {
             // ------------------------------------------------------------------------------------------------------------------------
             // ADDRESS SEARCH SETTINGS
             // ------------------------------------------------------------------------------------------------------------------------
