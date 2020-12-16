@@ -835,6 +835,7 @@ padding-right: 30px;
     max-height: 140px;
     overflow: auto;
     border-radius: 0 0 15px 15px;
+    min-height: 140px;
 }
 .footerGrid .footer-result .box ul li {
     display: inline-block;
