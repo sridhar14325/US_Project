@@ -1,4 +1,4 @@
-﻿define(["dojo/dom", "dojo/on",
+﻿define(["dojo/dom", "dojo/on", "dojo/topic",
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
@@ -6,7 +6,7 @@
     "dojo/text!widgets/Locator/templates/Locator.html",
     //"xstyle/css!widgets/Querries/css/Querries.css"
 ],
-    function (dom, on, declare, _WidgetBase, _TemplatedMixin, Locate, Graphic,
+    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin, Locate, Graphic,
         template) {
 
         var Locatorwidget = declare("widgets.Locator", [_WidgetBase, _TemplatedMixin], {
@@ -50,16 +50,22 @@
             PrepareLocator: function () {
                 var currentWidget = this;
                 try {
+                    var settings = currentWidget.Pconfig.LocatorSettings;
                     currentWidget.thisLocator = new Locate({
+                        url: settings.Locators[0]["LocatorURL"],
                         view: currentWidget.Gconfig.activeView,   // Attaches the Locate button to the view
                         graphic: new Graphic({
-                            symbol: { type: "simple-marker" }  // overwrites the default symbol used for the
+                            symbol: {
+                                type: "picture-marker", url: currentWidget.Pconfig.LocatorSettings.LocatorMarkupSymbolPath,
+                                width: currentWidget.Pconfig.LocatorSettings.MarkupSymbolSize.width + "px",
+                                height: currentWidget.Pconfig.LocatorSettings.MarkupSymbolSize.height + "px"
+                            }  // overwrites the default symbol used for the
                             // graphic placed at the location of the user when found
                         })
                     });
                     currentWidget.thisLocator.on("locate", function (locateEvent) {
                         currentWidget.LocateLocator(locateEvent);
-                    })
+                    });
                 } catch (e) {
                     console.log("[PrepareLocator] failed: " + e);
                 }
@@ -76,6 +82,8 @@
             // connections/subscriptions will be cleaned up during the destroy() lifecycle phase
             destroy: function () {
                 this.inherited(arguments);
+                var currentWidget = this;
+                currentWidget.thisLocator.graphic.layer.graphics.removeAll();
             },// show widget
             show: function () {
                 this.set("visible", true);

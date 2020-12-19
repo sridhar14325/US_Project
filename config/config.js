@@ -119,6 +119,31 @@ configOptions = {
             }
         },
         Locator: {
+            id: "Widget_SearchLocator",
+            options: {
+                LocatorSettings: {
+                    GraphicLayer: null,
+                    LocatorMarkupSymbolPath: "images/RedPushpin.png", // Set pushpin image path.
+                    MarkupSymbolSize: {
+                        width: 25,
+                        height: 25
+                    },
+                    Locators: [{
+                        DisplayText: "Search Address", //Set placeholder text
+                        NameofSearch: "Search Address",//Set name of search selection
+                        DefaultValue: "2600 Bull St. Columbia, SC 29201", // Set default address to search.
+                        LocatorParameters: ["SingleLine"], // Set Locator fields (fields to be used for searching).
+                        LocatorURL: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+                        CandidateFields: "Loc_name, Score, Match_addr", //Set which fields are returned in results
+                        DisplayField: "${Match_addr}", //Set which field from results is displayed
+                        AddressMatchScore: 80, //Set minimum score to be considered a match
+                        LocatorFieldName: 'Loc_name', //The returned field which specifies match type (specific locator within composite)
+                        LocatorFieldValues: ["USA.StreetName", "USA.PointAddress", "USA.StreetAddress", "USA.POI", "World"] //List of acceptable individual locators (within composite)
+                    }]
+                },
+            }
+        },
+        Search: {
             // ------------------------------------------------------------------------------------------------------------------------
             // ADDRESS SEARCH SETTINGS
             // ------------------------------------------------------------------------------------------------------------------------
@@ -134,6 +159,7 @@ configOptions = {
                     },
                     Locators: [{
                         DisplayText: "Search Address", //Set placeholder text
+                        NameofSearch: "Search Address",//Set name of search selection
                         DefaultValue: "2600 Bull St. Columbia, SC 29201", // Set default address to search.
                         LocatorParameters: ["SingleLine"], // Set Locator fields (fields to be used for searching).
                         LocatorURL: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
@@ -146,6 +172,5 @@ configOptions = {
                 },
             }
         }
-
     }
 };
