@@ -62,9 +62,13 @@
                         }];
                     currentWidget.thisSearch = new Search({
                         view: currentWidget.Gconfig.activeView,
-                        sources: sources,
+                        sources: [],
+                        searchTerm: settings.Locators[0]["DefaultValue"],
+                        includeDefaultSources: false,
+                        searchAllEnabled: false,
                         container: SearchInput
                     });
+                    currentWidget.thisSearch.sources = sources;
                 } catch (e) {
                     console.log(e);
                 }
