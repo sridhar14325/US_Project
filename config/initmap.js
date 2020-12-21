@@ -1,8 +1,9 @@
 ﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
-    "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator", "widgets/Search/Search",
+    "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator", "widgets/Search/Search", "widgets/Layers/Layers",
+    "widgets/Help/Help",
     "esri/geometry/SpatialReference",
     "dojo/domReady!"], function (Parser, Map, MapView, SceneView, Extent,
-        BaseMapGallery, Cust_Locator, Cust_Search,
+        BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help,
         SpatialReference) {
 
         var map = new Map({ basemap: configOptions.Global.ApplicationBaseMap });
@@ -15,6 +16,13 @@
                 Pconfig: configOptions.widgets.BaseMapGallery.options
             }, configOptions.widgets.BaseMapGallery.id);
             basemampgallery.startup();
+
+            //Installing Layers widget
+            var cust_layers = new Cust_Layers({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.Layers.options
+            });
+            cust_layers.startup();
 
             //Installing Locator widget
             var cust_locator = new Cust_Locator({
@@ -29,6 +37,13 @@
                 Pconfig: configOptions.widgets.Search.options
             });
             cust_Search.startup();
+
+            //Installing Search widget
+            var cust_help = new Cust_Help({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.Help.options
+            }, configOptions.widgets.Help.id);
+            cust_help.startup();
 
         };
         // Set the extent on the view
@@ -94,6 +109,6 @@
         }
 
     });
-//      Gconfig(Global Configuration)  means get the global configuration inputs
-//      Pconfig(Private Configuration)  means get own widget configuration inputs
-//      Oconfig(Other Configuration)  means get othre widget configuration inputs
+//      Gconfig(Global Configuration)   get the global configuration inputs
+//      Pconfig(Private Configuration)   get own widget configuration inputs
+//      Oconfig(Other Configuration)   get othre widget configuration inputs

@@ -84,10 +84,15 @@ configOptions = {
         // Set geometry service URL.
         GeometryService: "https://gis.dhec.sc.gov/arcgis/rest/services/Utilities/Geometry/GeometryServer",
 
+        // ------------------------------------------------------------------------------------------------------------------------
+        // DRIVING DIRECTIONS SETTINGS
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Set URL for routing service (network analyst).
+        RouteServiceURL: "https://gis.dhec.sc.gov/arcgis/rest/services/protected/Network/NAServer",
     },
     widgets: {
-        Navigation: {
-            id: "Navigationdiv",
+        Help: {
+            id: "Widget_Help",
             options: {
             }
         },
@@ -171,6 +176,106 @@ configOptions = {
                     }]
                 },
             }
+        },
+        //Operational layer collection.
+        Layers: {
+            id: "Widget_SearchLocator",
+            options: {
+                MapService: {
+                    ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer",
+                    id: "PublicNoticeLive_MapService",
+                    SubLayers: [0, 5, 1, 2, 3, 4],
+                    SubLayerIdKeys: { ALL: 0, STATEWIDE: 5, AIR: 1, BLWM: 2, OCRM: 3, WATER: 4 },
+                    SubLayerVisibiligy: { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true }
+                },
+                Services: {
+                    ALL: {
+                        Name: "All Notice Types",
+                        Image: "images/publicNotice_art.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/0",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not to be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    },
+                    STATEWIDE: {
+                        Name: "Statewide Public Notice",
+                        Image: "images/STATE.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/5",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    },
+                    AIR: {
+                        Name: "Bureau of Air Quality",
+                        Image: "images/AQ.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/1",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    },
+                    BLWM: {
+                        Name: "Bureau of Land and Waste Management",
+                        Image: "images/LW.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/2",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    },
+                    OCRM: {
+                        Name: "Division of Ocean and Coastal Resource Management",
+                        Image: "images/OC.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/3",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    },
+                    WATER: {
+                        Name: "Bureau of Water",
+                        Image: "images/BW.png",
+                        HasRendererImage: false,
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/4",
+                        distance: 4,
+                        FieldNames: [{
+                            FieldName: "SiteName",
+                            //WA edits-------add FieldID to allow for miles to not be displayed for statewide points
+                            FieldId: "Group_"
+                        }],
+                        LayerVisibility: true,
+                        ShowBeyondBuffer: true
+                    }
+                }
+            }
         }
+
     }
 };

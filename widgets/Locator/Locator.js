@@ -2,11 +2,13 @@
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
-    "esri/widgets/Locate", "esri/Graphic",
+    "esri/widgets/Locate", "esri/Graphic", "esri/tasks/Locator", "esri/geometry/Point",
+    "esri/geometry/SpatialReference", "esri/geometry/projection", "esri/geometry/support/webMercatorUtils",
     "dojo/text!widgets/Locator/templates/Locator.html",
     //"xstyle/css!widgets/Querries/css/Querries.css"
 ],
-    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin, Locate, Graphic,
+    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin, Locate, Graphic, Locator, Point,
+        SpatialReference, Projection, webMercatorUtils,
         template) {
 
         var Locatorwidget = declare("widgets.Locator", [_WidgetBase, _TemplatedMixin], {
@@ -16,7 +18,8 @@
             map: null,
             //theme: "HomeButton",
             //baseClass: "Navigation",
-            thisLocator: null,
+            thisGPSLocate: null,
+            thisAddressLocator: null,
 
 
             constructor: function (params, srcNodeRef) {
@@ -39,20 +42,29 @@
             startup: function () {
                 var currentWidget = this;
                 try {
-                    currentWidget.PrepareLocator();
+                    currentWidget.PrepareGPSLocator();
+                    currentWidget.PrepareAddressLocate();
+                    currentWidget.PrepareMapClick();
                     dom.byId("locatorabtn").onclick = function () {
-                        currentWidget.thisLocator.locate();
+                        currentWidget.thisGPSLocate.locate();
                     }
                 } catch (e) {
                     console.log(e);
                 }
             },
-            PrepareLocator: function () {
+            PrepareAddressLocate: function () {
+                var currentWidget = this;
+                try {
+                    currentWidget.thisAddressLocator = new Locator({ url: currentWidget.Pconfig.LocatorSettings.Locators[0]["LocatorURL"] });
+                } catch (e) {
+                    console.log("[PrepareAddressLocate] failed: " + e);
+                }
+            },
+            PrepareGPSLocator: function () {
                 var currentWidget = this;
                 try {
                     var settings = currentWidget.Pconfig.LocatorSettings;
-                    currentWidget.thisLocator = new Locate({
-                        url: settings.Locators[0]["LocatorURL"],
+                    currentWidget.thisGPSLocate = new Locate({
                         view: currentWidget.Gconfig.activeView,   // Attaches the Locate button to the view
                         graphic: new Graphic({
                             symbol: {
@@ -63,11 +75,30 @@
                             // graphic placed at the location of the user when found
                         })
                     });
-                    currentWidget.thisLocator.on("locate", function (locateEvent) {
-                        currentWidget.LocateLocator(locateEvent);
+                    currentWidget.thisGPSLocate.on("locate", function (locateEvent) {
+                        var mapPoint = new Point({ latitude: locateEvent.position.coords.latitude, longitude: locateEvent.position.coords.longitude });//, new SpatialReference({ wkid: 4326 })
+                        //var cMapPoint = Projection.project(mapPoint, currentWidget.Gconfig.activeView.spatialReference);
+                        var cMapPoint = webMercatorUtils.geographicToWebMercator(mapPoint);
+                        currentWidget.thisAddressLocator.locationToAddress({ location: cMapPoint }, 100)
+                            .then(function (res) { currentWidget.LocateLocator(res); },
+                            function (er) { console.log(er); });
+                    });
+
+                } catch (e) {
+                    console.log("[PrepareGPSLocator] failed: " + e);
+                }
+            },
+            PrepareMapClick: function () {
+                var currentWidget = this;
+                try {
+                    currentWidget.Gconfig.activeView.on("click", function (evt) {
+                        var mapPoint = new Point(evt.mapPoint.x, evt.mapPoint.y, currentWidget.Gconfig.activeView.spatialReference);
+                        currentWidget.thisAddressLocator.locationToAddress({ location: mapPoint }, 100)
+                            .then(function (res) { currentWidget.LocateLocator(res); },
+                            function (er) { console.log(er); });
                     });
                 } catch (e) {
-                    console.log("[PrepareLocator] failed: " + e);
+                    console.log("[PrepareMapClick] failed: " + e);
                 }
             },
             LocateLocator: function (evt) {
@@ -83,7 +114,7 @@
             destroy: function () {
                 this.inherited(arguments);
                 var currentWidget = this;
-                currentWidget.thisLocator.graphic.layer.graphics.removeAll();
+                currentWidget.thisGPSLocate.graphic.layer.graphics.removeAll();
             },// show widget
             show: function () {
                 this.set("visible", true);
