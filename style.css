@@ -111,9 +111,10 @@ body, html {
     margin: auto !important;
     outline: none;
     position: absolute;
-    right: -24px;
+    right: -20px;
     top: 0;
     bottom: 0;
+    z-index: 5;
 }
 .searchBox .esri-search__form {
     margin-right: -34px;
