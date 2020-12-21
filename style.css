@@ -84,9 +84,79 @@ body, html {
     border-radius: 30px;
     /* overflow: hidden; */
     margin-bottom: 0 !important;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); */
     pointer-events: auto;
+    min-height: 46px !important;
 }
+.searchBox .esri-search__input {
+    min-height: 46px !important;
+    border-radius: 54px;
+    outline: none;
+    padding-left:20px;
+}
+.searchBox  .esri-search {
+    width: 100% !important;
+    border-radius: 30px !important;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.searchBox .esri-search .esri-search__input-container {  
+    z-index: 2;
+    position:relative;
+}
+.searchBox .esri-search .esri-search__input-container .esri-widget--button {
+    margin: auto !important;
+    outline: none;
+    position: absolute;
+    right: -24px;
+    top: 0;
+    bottom: 0;
+}
+.searchBox .esri-search__form {
+    margin-right: -34px;
+}
+.searchBox .esri-search .esri-search__submit-button{
+    margin: auto !important;
+    outline: none;
+    padding: 10px 25px 10px 50px !important;
+    min-height: 46px !important;
+    background: #63b9d7;
+    border-radius: 0 54px 54px 0;
+    color: #ffffff;
+    position: relative;
+    /* left: -32px; */
+}
+.searchBox .esri-search .esri-widget--button {
+    margin: auto !important;
+    outline: none;
+}
+.searchBox .esri-search  .esri-search__suggestions-menu {
+    background: #fff;
+    padding: 20px 20px 15px 20px;
+    margin-top: 0px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    width: calc(100% + 76px);
+}
+.searchBox .esri-search .esri-search__warning-menu{
+    background: #fff;
+    padding: 20px 20px 15px 20px;
+    margin-top: 0px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    width: calc(100% + 0px);
+}
+/* .searchBox .esri-search .esri-search--show-suggestions .esri-search__suggestions-menu:before {
+    content: '';
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height:50%;
+    bottom: 100%;
+    border-radius: 25px 25px 0 0;
+} */
+
 .searchBox > .input-group{
     border-radius: 30px !important;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
