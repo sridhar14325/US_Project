@@ -47,6 +47,9 @@ body, html {
   margin-left: 0;
    transition: 0.5s ease all;
 }
+.mainContainer .esri-view .esri-view-surface {
+    outline: none !important;
+}
 .main-logo{
     font-weight: 500;
     font-size: 1rem;
@@ -93,6 +96,8 @@ body, html {
     border-radius: 54px;
     outline: none;
     padding-left:20px;
+    box-shadow: -1px 1px 3px rgba(0,0,0,0.1);
+    border-radius: 30px;
 }
 .searchBox  .esri-search {
     width: 100% !important;
@@ -100,7 +105,6 @@ body, html {
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .searchBox .esri-search .esri-search__input-container {  
-    z-index: 2;
     position:relative;
 }
 .searchBox .esri-search .esri-search__input-container .esri-widget--button {
@@ -113,6 +117,9 @@ body, html {
 }
 .searchBox .esri-search__form {
     margin-right: -34px;
+    z-index: 5;
+    /* box-shadow: -1px 1px 3px rgba(0,0,0,0.1);
+    border-radius: 30px; */
 }
 .searchBox .esri-search .esri-search__submit-button{
     margin: auto !important;
@@ -128,24 +135,28 @@ body, html {
 .searchBox .esri-search .esri-widget--button {
     margin: auto !important;
     outline: none;
+    z-index: 3;
 }
 .searchBox .esri-search  .esri-search__suggestions-menu {
     background: #fff;
-    padding: 20px 20px 15px 20px;
-    margin-top: 0px;
+    padding: 35px 20px 15px 20px;
     border-radius: 0 0 30px 30px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     width: calc(100% + 76px);
+    z-index: 2;
+    margin-top: -20px;
 }
 .searchBox .esri-search .esri-search__warning-menu{
     background: #fff;
-    padding: 20px 20px 15px 20px;
-    margin-top: 0px;
+    padding: 35px 20px 15px 20px;
     border-radius: 0 0 30px 30px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     width: calc(100% + 0px);
+    opacity: 1;
+    z-index: 2;
+    margin-top: -20px;
 }
-/* .searchBox .esri-search .esri-search--show-suggestions .esri-search__suggestions-menu:before {
+.searchBox .esri-search .esri-search--show-suggestions .esri-search__suggestions-menu:before {
     content: '';
     background: #fff;
     width: 100%;
@@ -155,7 +166,7 @@ body, html {
     height:50%;
     bottom: 100%;
     border-radius: 25px 25px 0 0;
-} */
+}
 
 .searchBox > .input-group{
     border-radius: 30px !important;
