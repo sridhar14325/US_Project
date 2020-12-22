@@ -48,30 +48,31 @@
                 var currentWidget = this;
                 try {
                     var servSet = currentWidget.Pconfig.MapService;
+                    var sublayers = [
+                        {
+                            id: 5,
+                            visible: servSet.SubLayerVisibiligy["5"]
+                        }, {
+                            id: 4,
+                            visible: servSet.SubLayerVisibiligy["4"]
+                        }, {
+                            id: 3,
+                            visible: servSet.SubLayerVisibiligy["3"]
+                        }, {
+                            id: 2,
+                            visible: servSet.SubLayerVisibiligy["2"]
+                        }, {
+                            id: 1,
+                            visible: servSet.SubLayerVisibiligy["1"]
+                        }, {
+                            id: 0,
+                            visible: servSet.SubLayerVisibiligy["0"]
+                        }
+                    ];
                     var layer = new MapImageLayer({
-                        url: servSet.ServiceUrl, id: servSet.id,
-                        sublayers: [
-                            {
-                                id: 5,
-                                visible: servSet.SubLayerVisibiligy["5"]
-                            }, {
-                                id: 4,
-                                visible: servSet.SubLayerVisibiligy["4"]
-                            }, {
-                                id: 3,
-                                visible: servSet.SubLayerVisibiligy["3"]
-                            }, {
-                                id: 2,
-                                visible: servSet.SubLayerVisibiligy["2"]
-                            }, {
-                                id: 1,
-                                visible: servSet.SubLayerVisibiligy["1"]
-                            }, {
-                                id: 0,
-                                visible: servSet.SubLayerVisibiligy["0"]
-                            }
-                        ]
+                        url: servSet.ServiceUrl, id: servSet.id
                     });
+
                     layer.loadAll()
                         .catch(function (error) {
                             console.log("All loading Failed");

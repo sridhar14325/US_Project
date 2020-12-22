@@ -40,6 +40,15 @@
             startup: function () {
                 var currentWidget = this;
                 try {
+                    currentWidget.PrepareSearchUI();
+                    topic.subscribe("Locator-Search/inputqry", function (qry) { currentWidget.thisSearch.search(qry); });
+                } catch (e) {
+                    console.log(e);
+                }
+            },
+            PrepareSearchUI: function () {
+                var currentWidget = this;
+                try {
                     var settings = currentWidget.Pconfig.LocatorSettings;
                     const sources = [
                         {
@@ -69,8 +78,10 @@
                         container: SearchInput
                     });
                     currentWidget.thisSearch.sources = sources;
+                    on(currentWidget.thisSearch, "search-complete", function (res) { debugger; });
+                    on(currentWidget.thisSearch, "select-result", function (res) { debugger; });
                 } catch (e) {
-                    console.log(e);
+                    console.log("[PrepareSearchUI] failed: " + e);
                 }
             },
             // Below function use to activate the button functionalaties
