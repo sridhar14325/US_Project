@@ -78,10 +78,19 @@
                         container: SearchInput
                     });
                     currentWidget.thisSearch.sources = sources;
-                    on(currentWidget.thisSearch, "search-complete", function (res) { debugger; });
-                    on(currentWidget.thisSearch, "select-result", function (res) { debugger; });
+                    //on(currentWidget.thisSearch, "search-complete", function (res) { debugger; });
+                    on(currentWidget.thisSearch, "select-result", function (res) { currentWidget.SearchResultsDisplay(res); });
                 } catch (e) {
                     console.log("[PrepareSearchUI] failed: " + e);
+                }
+            },
+            SearchResultsDisplay: function (qry) {
+                var currentWidget = this;
+                try {
+                    //debugger;
+                    topic.publish("Search-IdentifyQuery/inputqry", qry.result.feature.get("geometry"));
+                } catch (e) {
+                    console.log("[SearchResultsDisplay] failed: " + e);
                 }
             },
             // Below function use to activate the button functionalaties

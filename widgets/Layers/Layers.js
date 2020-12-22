@@ -1,11 +1,11 @@
-﻿define(["dojo/dom", "dojo/on",
+﻿define(["dojo/dom", "dojo/on", "dojo/topic",
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
-    "esri/layers/MapImageLayer",
+    "esri/layers/MapImageLayer", "esri/layers/FeatureLayer",
     "dojo/text!widgets/Layers/templates/Layers.html"],
-    function (dom, on, declare, _WidgetBase, _TemplatedMixin,
-        MapImageLayer,
+    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
+        MapImageLayer, FeatureLayer,
         template) {
 
         var Layerswidget = declare("widgets.Layers", [_WidgetBase, _TemplatedMixin], {
@@ -69,19 +69,11 @@
                             visible: servSet.SubLayerVisibiligy["0"]
                         }
                     ];
-                    var layer = new MapImageLayer({
-                        url: servSet.ServiceUrl, id: servSet.id
-                    });
+                    var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid });
+                    var Servicelayer = new MapImageLayer({ url: servSet.ServiceUrl, id: servSet.Serviceid });
 
-                    layer.loadAll()
-                        .catch(function (error) {
-                            console.log("All loading Failed");
-                            // Ignore any failed resources
-                        })
-                        .then(function () {
-                            console.log("All loaded Success");
-                        });
-                    currentWidget.map.add(layer);
+                    currentWidget.map.add(Baselayer);
+                    currentWidget.map.add(Servicelayer);
                 } catch (e) {
                     console.log("[LayersAddToMap] failed: " + e);
                 }

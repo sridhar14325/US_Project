@@ -1,9 +1,9 @@
 ﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
     "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator", "widgets/Search/Search", "widgets/Layers/Layers",
-    "widgets/Help/Help",
+    "widgets/Help/Help", "widgets/IdentifyQuery/IdentifyQuery",
     "esri/geometry/SpatialReference",
     "dojo/domReady!"], function (Parser, Map, MapView, SceneView, Extent,
-        BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help,
+        BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help, Cust_IdentifyQuery,
         SpatialReference) {
 
         var map = new Map({ basemap: configOptions.Global.ApplicationBaseMap });
@@ -27,7 +27,7 @@
             //Installing Locator widget
             var cust_locator = new Cust_Locator({
                 map: map, Gconfig: configOptions.Global,
-                Pconfig: configOptions.widgets.Locator.options
+                Pconfig: configOptions.widgets.Search.options
             });
             cust_locator.startup();
 
@@ -44,6 +44,13 @@
                 Pconfig: configOptions.widgets.Help.options
             }, configOptions.widgets.Help.id);
             cust_help.startup();
+
+            //Installing IdentifyQuery widget for get qury bottom inputs
+            var cust_identifyQuery = new Cust_IdentifyQuery({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.Layers.options
+            });
+            cust_identifyQuery.startup();
 
         };
         // Set the extent on the view

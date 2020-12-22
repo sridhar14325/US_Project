@@ -127,24 +127,7 @@ configOptions = {
             id: "Widget_SearchLocator",
             options: {
                 LocatorSettings: {
-                    GraphicLayer: null,
-                    LocatorMarkupSymbolPath: "images/RedPushpin.png", // Set pushpin image path.
-                    MarkupSymbolSize: {
-                        width: 25,
-                        height: 25
-                    },
-                    Locators: [{
-                        DisplayText: "Search Address", //Set placeholder text
-                        NameofSearch: "Search Address",//Set name of search selection
-                        DefaultValue: "2600 Bull St. Columbia, SC 29201", // Set default address to search.
-                        LocatorParameters: ["SingleLine"], // Set Locator fields (fields to be used for searching).
-                        LocatorURL: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
-                        CandidateFields: "Loc_name, Score, Match_addr", //Set which fields are returned in results
-                        DisplayField: "${Match_addr}", //Set which field from results is displayed
-                        AddressMatchScore: 80, //Set minimum score to be considered a match
-                        LocatorFieldName: 'Loc_name', //The returned field which specifies match type (specific locator within composite)
-                        LocatorFieldValues: ["USA.StreetName", "USA.PointAddress", "USA.StreetAddress", "USA.POI", "World"] //List of acceptable individual locators (within composite)
-                    }]
+                    //Used below Search widget for inputs
                 },
             }
         },
@@ -182,8 +165,10 @@ configOptions = {
             id: "Widget_SearchLocator",
             options: {
                 MapService: {
-                    ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer",
-                    id: "PublicNoticeLive_MapService",
+                    BaseSericeUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/Baselayers/Baselayers/MapServer/0",
+                    Baseid: "PublicNoticeLive_BaseService",
+                    ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer",
+                    Serviceid: "PublicNoticeLive_MapService",
                     SubLayers: [0, 5, 1, 2, 3, 4],
                     SubLayerIdKeys: { ALL: 0, STATEWIDE: 5, AIR: 1, BLWM: 2, OCRM: 3, WATER: 4 },
                     SubLayerVisibiligy: { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true }
@@ -193,7 +178,7 @@ configOptions = {
                         Name: "All Notice Types",
                         Image: "images/publicNotice_art.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/0",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/0",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -207,7 +192,7 @@ configOptions = {
                         Name: "Statewide Public Notice",
                         Image: "images/STATE.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/5",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/5",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -221,7 +206,7 @@ configOptions = {
                         Name: "Bureau of Air Quality",
                         Image: "images/AQ.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/1",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/1",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -235,7 +220,7 @@ configOptions = {
                         Name: "Bureau of Land and Waste Management",
                         Image: "images/LW.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/2",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/2",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -249,7 +234,7 @@ configOptions = {
                         Name: "Division of Ocean and Coastal Resource Management",
                         Image: "images/OC.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/3",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/3",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -263,7 +248,7 @@ configOptions = {
                         Name: "Bureau of Water",
                         Image: "images/BW.png",
                         HasRendererImage: false,
-                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/PublicNoticeLive/MapServer/4",
+                        ServiceUrl: "https://gis.dhec.sc.gov/arcgis/rest/services/environment/Public_Notice/MapServer/4",
                         distance: 4,
                         FieldNames: [{
                             FieldName: "SiteName",
@@ -274,6 +259,12 @@ configOptions = {
                         ShowBeyondBuffer: true
                     }
                 }
+            }
+        },
+        IdentifyQuery: {
+            id: "Widget_IdentifyQuery",
+            options: {
+                //used above Layers widget in this options
             }
         }
 
