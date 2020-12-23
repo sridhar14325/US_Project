@@ -48,7 +48,8 @@
             //Installing IdentifyQuery widget for get qury bottom inputs
             var cust_identifyQuery = new Cust_IdentifyQuery({
                 map: map, Gconfig: configOptions.Global,
-                Pconfig: configOptions.widgets.Layers.options
+                Pconfig: configOptions.widgets.Layers.options,
+                Oconfig: configOptions.widgets.IdentifyQuery.otherOptions
             });
             cust_identifyQuery.startup();
 

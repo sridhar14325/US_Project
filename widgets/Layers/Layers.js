@@ -54,23 +54,32 @@
                             visible: servSet.SubLayerVisibiligy["5"]
                         }, {
                             id: 4,
-                            visible: servSet.SubLayerVisibiligy["4"]
+                            visible: servSet.SubLayerVisibiligy["4"],
+                            popupEnabled: true,
+                            //popupTemplate: {
+                            //    title: "{COUNTY}",
+                            //    content: "{POP2007} people lived in this county in 2007"
+                            //}
                         }, {
                             id: 3,
-                            visible: servSet.SubLayerVisibiligy["3"]
+                            visible: servSet.SubLayerVisibiligy["3"],
+                            popupEnabled: true
                         }, {
                             id: 2,
-                            visible: servSet.SubLayerVisibiligy["2"]
+                            visible: servSet.SubLayerVisibiligy["2"],
+                            popupEnabled: true
                         }, {
                             id: 1,
-                            visible: servSet.SubLayerVisibiligy["1"]
+                            visible: servSet.SubLayerVisibiligy["1"],
+                            popupEnabled: true
                         }, {
                             id: 0,
-                            visible: servSet.SubLayerVisibiligy["0"]
+                            visible: servSet.SubLayerVisibiligy["0"],
+                            popupEnabled: true
                         }
                     ];
                     var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid });
-                    var Servicelayer = new MapImageLayer({ url: servSet.ServiceUrl, id: servSet.Serviceid });
+                    var Servicelayer = new MapImageLayer({ url: servSet.ServiceUrl, id: servSet.Serviceid, sublayers: sublayers });
 
                     currentWidget.map.add(Baselayer);
                     currentWidget.map.add(Servicelayer);

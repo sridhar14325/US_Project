@@ -265,6 +265,14 @@ configOptions = {
             id: "Widget_IdentifyQuery",
             options: {
                 //used above Layers widget in this options
+            },
+            otherOptions: {
+                BufferDistance: 4,
+                DistanceType: "miles",// available calculation types --> "meters"|"feet"|"kilometers"|"miles"|"nautical-miles"|"yards"
+                routeLayerId: "RoutGraphicLayer",
+                RouteColor: "#CC6633",
+                RouteWidth: 4,
+                SearchforDirections: false,
             }
         }
 
