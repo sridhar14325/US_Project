@@ -2,17 +2,18 @@
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
+    "esri/core/units", "esri/Color",
     "esri/geometry/geometryEngine",
     "esri/geometry/SpatialReference", "esri/geometry/projection", "esri/geometry/support/webMercatorUtils",
-    "esri/symbols/SimpleLineSymbol", "esri/Graphic",
+    "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Graphic",
     "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/tasks/support/Query",
     "esri/tasks/RouteTask", "esri/tasks/support/RouteParameters", "esri/tasks/support/FeatureSet",
     "esri/layers/GraphicsLayer",
     "dojo/text!widgets/IdentifyQuery/templates/IdentifyQuery.html"],
     function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
-        geometryEngine,
+        units, Color, geometryEngine,
         SpatialReference, Projection, webMercatorUtils,
-        SimpleLineSymbol, Graphic,
+        SimpleLineSymbol, SimpleFillSymbol, Graphic,
         IdentifyTask, IdentifyParameters, Query,
         RouteTask, RouteParameters, FeatureSet,
         GraphicsLayer,
@@ -30,7 +31,7 @@
             thisRouteLayer: null,
             thisRouteParams: null,
             thisRouteSymbol: null,
-
+            areaBoundaries: [],
             constructor: function (params, srcNodeRef) {
                 params = params || {};
                 try {
@@ -56,6 +57,7 @@
                     currentWidget.PrepareRouteTask();
                     currentWidget.PrepareIdentificationTask();
                     topic.subscribe("Search-IdentifyQuery/inputqry", function (qry) { currentWidget.executeIdentificationTask(qry); });
+                    topic.subscribe("Layers-IdentifyQuery/areapolygons", function (graphics) { currentWidget.areaBoundaries = graphics; });
                 } catch (e) {
                     console.log(e);
                 }
@@ -73,16 +75,19 @@
             executeIdentificationTask: function (inputqry) {
                 var currentWidget = this;
                 try {
-                    var cGeometry = webMercatorUtils.webMercatorToGeographic(inputqry);
+                    //var cGeometry = webMercatorUtils.webMercatorToGeographic(inputqry);
+                    //var bufferGeometry = geometryEngine.geodesicBuffer(inputqry, currentWidget.Oconfig.BufferDistance, currentWidget.Oconfig.DistanceType);
+                    var union = geometryEngine.union(currentWidget.areaBoundaries);
 
-                    var bufferGeometry = geometryEngine.geodesicBuffer(cGeometry, currentWidget.Oconfig.BufferDistance, currentWidget.Oconfig.DistanceType);
-
+                    //var sfs = new SimpleFillSymbol(); var polygonGraphic = new Graphic({ geometry: union, symbol: sfs });
+                    //currentWidget.thisRouteLayer.add(polygonGraphic);
                     var identyForms = new IdentifyParameters();
-                    identyForms.geometry = bufferGeometry;
+                    identyForms.geometry = union;
                     identyForms.layerIds = currentWidget.Pconfig.MapService.SubLayers;
                     identyForms.tolerance = 3;
+                    identyForms.layerOption = "all";
                     identyForms.mapExtent = configOptions.Global.activeView.extent;
-                    identyForms.returnGeometry = false;
+                    identyForms.returnGeometry = true;
 
                     currentWidget.thisIdentifyTask.execute(identyForms)
                         .then(function (res) { currentWidget.iTaskExecutes(inputqry, res, currentWidget.Oconfig.DistanceType); }, function (er) { console.log(er); });
@@ -93,9 +98,27 @@
             iTaskExecutes: function (FromPoint, iFLayers, dType) {
                 var currentWidget = this;
                 try {
-                    for (var i = 0; i < length; i++) {
-                        currentWidget.distanceCalculation(FromPoint, "", dType);
+                    var domALLid = dom.byId("ul_ALL"); domALLid.innerHTML = "";
+                    var domSTATEWIDEid = dom.byId("ul_SPN"); domSTATEWIDEid.innerHTML = "";
+                    var domAIRid = dom.byId("ul_AQ"); domAIRid.innerHTML = "";
+                    var domBLWMid = dom.byId("ul_LW"); domBLWMid.innerHTML = "";
+                    var domOCRMid = dom.byId("ul_OC"); domOCRMid.innerHTML = "";
+                    var domWATERid = dom.byId("ul_BW"); domWATERid.innerHTML = "";
+                    var features = iFLayers.results;
+                    for (var i = 0; i < features.length; i++) {
+                        var litag = document.createElement("li");
+                        var atag = document.createElement("a");
+                        atag.innerHTML = features[i]["feature"]["attributes"]["SiteName"] + " (" + geometryEngine.distance(FromPoint, features[i]["feature"]["geometry"], dType).toFixed(2) + " " + dType + ")";
+                        litag.appendChild(atag);
+                        if (features[i]["layerName"] == "ALL") { domALLid.appendChild(litag); }
+                        else if (features[i]["layerName"] == "WATER") { domWATERid.appendChild(litag); }
+                        else if (features[i]["layerName"] == "STATEWIDE") { domSTATEWIDEid.appendChild(litag); }
+                        else if (features[i]["layerName"] == "AIR") { domAIRid.appendChild(litag); }
+                        else if (features[i]["layerName"] == "BLWM") { domBLWMid.appendChild(litag); }
+                        else if (features[i]["layerName"] == "OCRM") { domOCRMid.appendChild(litag); }
+                        else { console.log("Unknown Data"); }
                     }
+
                 } catch (e) {
                     console.log("[TaskExecutes] failed: " + e);
                 }
@@ -104,6 +127,7 @@
                 var currentWidget = this;
                 try {
                     var distance = geometryEngine.distance(FrmPoint, ToPoint, dType);
+                    return distance;
                 } catch (e) {
                     console.log("[distanceCalculation] failed: " + e);
                 }
@@ -131,7 +155,7 @@
                     currentWidget.thisRouteParams.stops = new FeatureSet();
                     currentWidget.thisRouteParams.returnRoutes = false;
                     currentWidget.thisRouteParams.returnDirections = true;
-                    currentWidget.thisRouteParams.directionsLengthUnits = esri.Units.MILES;
+                    currentWidget.thisRouteParams.directionsLengthUnits = currentWidget.Oconfig.DistanceType;//units.MILES;
                     currentWidget.thisRouteParams.outSpatialReference = currentWidget.Gconfig.activeView.spatialReference;
 
                     currentWidget.thisRouteLayer = new GraphicsLayer();
@@ -139,8 +163,8 @@
                     currentWidget.map.add(currentWidget.thisRouteLayer);
 
                     currentWidget.thisRouteSymbol = new SimpleLineSymbol();
-                    currentWidget.thisRouteSymbol.color(currentWidget.Oconfig.RouteColor);
-                    currentWidget.thisRouteSymbol.width(currentWidget.Oconfig.RouteWidth);
+                    currentWidget.thisRouteSymbol.color = new Color(currentWidget.Oconfig.RouteColor);
+                    currentWidget.thisRouteSymbol.width = currentWidget.Oconfig.RouteWidth;
 
                 } catch (e) {
                     console.log("[TaskExecutes] failed: " + e);

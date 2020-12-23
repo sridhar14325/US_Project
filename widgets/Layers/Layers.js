@@ -2,10 +2,10 @@
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
-    "esri/layers/MapImageLayer", "esri/layers/FeatureLayer",
+    "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/tasks/support/Query",
     "dojo/text!widgets/Layers/templates/Layers.html"],
     function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
-        MapImageLayer, FeatureLayer,
+        MapImageLayer, FeatureLayer, Query,
         template) {
 
         var Layerswidget = declare("widgets.Layers", [_WidgetBase, _TemplatedMixin], {
@@ -81,6 +81,17 @@
                     var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid });
                     var Servicelayer = new MapImageLayer({ url: servSet.ServiceUrl, id: servSet.Serviceid, sublayers: sublayers });
 
+                    Baselayer.load().then(function (evt) {
+                        var qry = new Query(); qry.where = "1=1"; qry.outFields = ["OBJECTID"]; qry.returnGeometry = true;
+                        evt.queryFeatures(qry)
+                            .then(function (response) {
+                                var graphics = [];
+                                for (var i = 0; i < response.features.length; i++) {
+                                    graphics.push(response.features[i]["geometry"]);
+                                }
+                                topic.publish("Layers-IdentifyQuery/areapolygons", graphics);
+                            });
+                    }, function (er) { console.log(er); });;
                     currentWidget.map.add(Baselayer);
                     currentWidget.map.add(Servicelayer);
                 } catch (e) {

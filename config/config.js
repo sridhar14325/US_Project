@@ -268,7 +268,7 @@ configOptions = {
             },
             otherOptions: {
                 BufferDistance: 4,
-                DistanceType: "miles",// available calculation types --> "meters"|"feet"|"kilometers"|"miles"|"nautical-miles"|"yards"
+                DistanceType: "miles",
                 routeLayerId: "RoutGraphicLayer",
                 RouteColor: "#CC6633",
                 RouteWidth: 4,
