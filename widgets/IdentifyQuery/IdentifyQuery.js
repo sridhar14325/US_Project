@@ -60,7 +60,10 @@
                 try {
                     currentWidget.PrepareRouteTask();
                     currentWidget.PrepareIdentificationTask();
-                    topic.subscribe("Search-IdentifyQuery/inputqry", function (qry) { currentWidget.executeIdentificationTask(qry); });
+                    topic.subscribe("Search-IdentifyQuery/inputqry", function (qry) {
+                        currentWidget.executeIdentificationTask(qry);
+                        currentWidget.ClearSelectedPointGraphics();
+                    });
                     //topic.subscribe("Locator-IdentifyQuery/inputqry", function (qry) { currentWidget.executeIdentificationTask(qry); });
                     topic.subscribe("Layers-IdentifyQuery/areapolygons", function (graphics) { currentWidget.areaBoundaries = graphics; });
                 } catch (e) {
@@ -150,7 +153,7 @@
             ResultsClickOut: function (evt) {
                 var currentWidget = this;
                 try {
-                    debugger;
+
                     currentWidget.ClearSelectedPointGraphics();
                     // First create a point geometry
                     var point = {
@@ -169,7 +172,8 @@
                     // Create a symbol for drawing the point
                     var markerSymbol = {
                         type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-                        color: [226, 119, 40]
+                        color: [226, 119, 40, 1],
+                        size: 1
                     };
 
                     // Create a graphic and add the geometry and symbol to it
@@ -184,6 +188,7 @@
 
                     currentWidget.Gconfig.activeView.popup.features = [pointGraphic];
                     currentWidget.Gconfig.activeView.popup.selectedFeatureIndex = 0;
+                    currentWidget.Gconfig.activeView.popup.location = pG;
                     currentWidget.Gconfig.activeView.popup.visible = true;
                     // go to the given point
                     currentWidget.Gconfig.activeView.goTo(pointGraphic);
@@ -195,7 +200,8 @@
             ClearSelectedPointGraphics: function () {
                 var currentWidget = this;
                 try {
-                    currentWidget.thisSeletedPointGraphicLayer.graphics.removeAll()
+                    currentWidget.thisSeletedPointGraphicLayer.graphics.removeAll();
+                    currentWidget.Gconfig.activeView.popup.visible = false;
                 } catch (e) {
                     console.log("[ClearSelectedPointGraphics] failed: " + e);
                 }
