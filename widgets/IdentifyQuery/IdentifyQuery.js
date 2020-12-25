@@ -32,6 +32,8 @@
             thisRouteParams: null,
             thisRouteSymbol: null,
             areaBoundaries: [],
+            thisSeletedPointGraphicLayer: null,
+
             constructor: function (params, srcNodeRef) {
                 params = params || {};
                 try {
@@ -46,6 +48,8 @@
                 //var domNode = this.domNode;
                 try {
                     this.inherited(arguments);
+                    this.thisSeletedPointGraphicLayer = new GraphicsLayer({ id: this.Oconfig.selectLayerId });
+                    this.map.add(this.thisSeletedPointGraphicLayer);
                 } catch (e) {
                     console.log(e);
                 }
@@ -57,6 +61,7 @@
                     currentWidget.PrepareRouteTask();
                     currentWidget.PrepareIdentificationTask();
                     topic.subscribe("Search-IdentifyQuery/inputqry", function (qry) { currentWidget.executeIdentificationTask(qry); });
+                    //topic.subscribe("Locator-IdentifyQuery/inputqry", function (qry) { currentWidget.executeIdentificationTask(qry); });
                     topic.subscribe("Layers-IdentifyQuery/areapolygons", function (graphics) { currentWidget.areaBoundaries = graphics; });
                 } catch (e) {
                     console.log(e);
@@ -108,6 +113,11 @@
                     for (var i = 0; i < features.length; i++) {
                         var litag = document.createElement("li");
                         var atag = document.createElement("a");
+                        atag.dataset["layerId"] = features[i]["layerId"];
+                        atag.dataset["OBJECTID"] = features[i]["feature"]["attributes"]["OBJECTID"];
+                        atag.dataset["geometry"] = JSON.stringify(features[i]["feature"]["geometry"]);
+                        atag.dataset["attributes"] = JSON.stringify(features[i]["feature"]["attributes"]);
+                        atag.href = "#";
                         atag.innerHTML = features[i]["feature"]["attributes"]["SiteName"] + " (" + geometryEngine.distance(FromPoint, features[i]["feature"]["geometry"], dType).toFixed(2) + " " + dType + ")";
                         litag.appendChild(atag);
                         if (features[i]["layerName"] == "ALL") { domALLid.appendChild(litag); }
@@ -118,7 +128,12 @@
                         else if (features[i]["layerName"] == "OCRM") { domOCRMid.appendChild(litag); }
                         else { console.log("Unknown Data"); }
                     }
-
+                    dojo.query("#ul_ALL a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
+                    dojo.query("#ul_SPN a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
+                    dojo.query("#ul_AQ a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
+                    dojo.query("#ul_LW a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
+                    dojo.query("#ul_OC a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
+                    dojo.query("#ul_BW a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
                 } catch (e) {
                     console.log("[TaskExecutes] failed: " + e);
                 }
@@ -130,6 +145,59 @@
                     return distance;
                 } catch (e) {
                     console.log("[distanceCalculation] failed: " + e);
+                }
+            },
+            ResultsClickOut: function (evt) {
+                var currentWidget = this;
+                try {
+                    debugger;
+                    currentWidget.ClearSelectedPointGraphics();
+                    // First create a point geometry
+                    var point = {
+                        type: "point",  // autocasts as new Point()
+                        longitude: -71.2643,
+                        latitude: 42.0909
+                    };
+                    var pA = JSON.parse(evt.currentTarget.dataset.attributes);
+                    var pG = JSON.parse(evt.currentTarget.dataset.geometry);
+                    pG["type"] = "point";
+                    var popupTemplate = {
+                        // autocasts as new PopupTemplate()
+                        title: "{" + currentWidget.Gconfig.InfoWindowHeader + "}",
+                        content: infoContent
+                    }
+                    // Create a symbol for drawing the point
+                    var markerSymbol = {
+                        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                        color: [226, 119, 40]
+                    };
+
+                    // Create a graphic and add the geometry and symbol to it
+                    var pointGraphic = new Graphic({
+                        geometry: pG,
+                        attributes: pA,
+                        popupTemplate: popupTemplate,
+                        symbol: markerSymbol
+                    });
+
+                    currentWidget.thisSeletedPointGraphicLayer.add(pointGraphic);
+
+                    currentWidget.Gconfig.activeView.popup.features = [pointGraphic];
+                    currentWidget.Gconfig.activeView.popup.selectedFeatureIndex = 0;
+                    currentWidget.Gconfig.activeView.popup.visible = true;
+                    // go to the given point
+                    currentWidget.Gconfig.activeView.goTo(pointGraphic);
+
+                } catch (e) {
+                    console.log("[ResultsClickOut] failed: " + e);
+                }
+            },
+            ClearSelectedPointGraphics: function () {
+                var currentWidget = this;
+                try {
+                    currentWidget.thisSeletedPointGraphicLayer.graphics.removeAll()
+                } catch (e) {
+                    console.log("[ClearSelectedPointGraphics] failed: " + e);
                 }
             },
             ShowRoute: function (FrmPoint, ToPoint) {

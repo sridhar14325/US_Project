@@ -6,6 +6,18 @@ else if (AppEnv == "Test") { PortUrl = ""; instanse = "portal"; AppPath = window
 else if (AppEnv == "Stage") { PortUrl = ""; instanse = "portal"; AppPath = window.location.protocol + window.location.host; }
 else if (AppEnv == "Prod") { PortUrl = ""; instanse = "portal"; AppPath = window.location.protocol + window.location.host; }
 
+//Set the information window configuration.
+var infoContent = "<table class='cust-info-content'>";
+infoContent += "<tr><td>Applicant</td><td>:</td><td>{Applicant}</td></tr>";
+infoContent += "<tr><td>Notice Type</td><td>:</td><td>{Title}</td></tr>";
+infoContent += "<tr><td>Longitude</td><td>:</td><td>{Longitude}</td></tr>";
+infoContent += "<tr><td>Latitude</td><td>:</td><td>{Latitude}</td></tr>";
+infoContent += "<tr><td>Location Accuracy</td><td>:</td><td>{Accuracy}</td></tr>";
+infoContent += "<tr><td>Start Date</td><td>:</td><td>{Start_txt}</td></tr>";
+infoContent += "<tr><td>End Date</td><td>:</td><td>{End_txt}</td></tr>";
+infoContent += "<tr><td>More Info</td><td>:</td><td>{URL}</td></tr>";
+infoContent += "</table>";
+
 configOptions = {
 
     Global: {
@@ -89,6 +101,7 @@ configOptions = {
         // ------------------------------------------------------------------------------------------------------------------------
         // Set URL for routing service (network analyst).
         RouteServiceURL: "https://gis.dhec.sc.gov/arcgis/rest/services/protected/Network/NAServer",
+        InfoWindoContent: "",
     },
     widgets: {
         Help: {
@@ -273,6 +286,7 @@ configOptions = {
                 RouteColor: "#CC6633",
                 RouteWidth: 4,
                 SearchforDirections: false,
+                selectLayerId: "SelectedPointGraphicLayer"
             }
         }
 

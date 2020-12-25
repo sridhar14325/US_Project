@@ -2,10 +2,10 @@
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
-    "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/tasks/support/Query",
+    "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/tasks/support/Query", "esri/PopupTemplate",
     "dojo/text!widgets/Layers/templates/Layers.html"],
     function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
-        MapImageLayer, FeatureLayer, Query,
+        MapImageLayer, FeatureLayer, Query, PopupTemplate,
         template) {
 
         var Layerswidget = declare("widgets.Layers", [_WidgetBase, _TemplatedMixin], {
@@ -48,34 +48,67 @@
                 var currentWidget = this;
                 try {
                     var servSet = currentWidget.Pconfig.MapService;
+                    var popuptemplate = new PopupTemplate("Location", "Street: ${ADDRESS}");
+                    
                     var sublayers = [
                         {
                             id: 5,
-                            visible: servSet.SubLayerVisibiligy["5"]
+                            visible: servSet.SubLayerVisibiligy["5"],
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }, {
                             id: 4,
                             visible: servSet.SubLayerVisibiligy["4"],
                             popupEnabled: true,
-                            //popupTemplate: {
-                            //    title: "{COUNTY}",
-                            //    content: "{POP2007} people lived in this county in 2007"
-                            //}
+                            // popupTemplate: popuptemplate
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }, {
                             id: 3,
                             visible: servSet.SubLayerVisibiligy["3"],
-                            popupEnabled: true
+                            popupEnabled: true,
+                            // popupTemplate: popuptemplate
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }, {
                             id: 2,
                             visible: servSet.SubLayerVisibiligy["2"],
-                            popupEnabled: true
+                            popupEnabled: true,
+                            // popupTemplate: popuptemplate
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }, {
                             id: 1,
                             visible: servSet.SubLayerVisibiligy["1"],
-                            popupEnabled: true
+                            popupEnabled: true,
+                            // popupTemplate: popuptemplate
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }, {
                             id: 0,
                             visible: servSet.SubLayerVisibiligy["0"],
-                            popupEnabled: true
+                            popupEnabled: true,
+                            // popupTemplate: popuptemplate
+                            popupTemplate: {
+                                title: "{SiteName}",
+                                outFields: ["*"],
+                                content: infoContent
+                            }
                         }
                     ];
                     var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid });

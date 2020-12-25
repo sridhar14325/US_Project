@@ -75,6 +75,7 @@
                         searchTerm: settings.Locators[0]["DefaultValue"],
                         includeDefaultSources: false,
                         searchAllEnabled: false,
+                        popupEnabled: false,
                         container: SearchInput
                     });
                     currentWidget.thisSearch.sources = sources;

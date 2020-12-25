@@ -106,6 +106,7 @@
                 try {
                     var attributes = evt.get("attributes");
                     topic.publish("Locator-Search/inputqry", geometry);
+                    //topic.publish("Locator-IdentifyQuery/inputqry", geometry);
                     if (type == "GPSClick") { currentWidget.thisGPSLocate.graphic.layer.graphics.removeAll(); }
                 } catch (e) {
                     console.log("[LocateLocator] failed: " + e);
