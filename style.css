@@ -402,7 +402,7 @@ display:block;
     display: flex;
     align-items: center;
     pointer-events: none;
-    width:59px;
+    width:61px;
 }
 /* .rightOverlay .contentBox .tab-content>.tab-pane.active {
     display: flex;
@@ -661,6 +661,29 @@ z-index: 99;
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton{
      border-radius: 0 0 30px 30px!important;
       outline: 0;
+}
+.esri-ui .esri-popup {
+    border-radius: 10px;
+}
+.esri-ui .esri-popup .esri-popup__main-container {
+    border-radius: 10px;
+}
+.esri-ui .esri-popup .esri-popup__header {
+    background: #a4ddf1;
+    font-weight: bold;
+    border-radius: 10px !important;
+    border: 3px solid #ffffff;
+    overflow: hidden;
+}
+.esri-ui .esri-popup .esri-popup__header .esri-popup__header-title {
+    text-transform: capitalize;
+}
+.esri-ui .esri-popup .esri-popup__header * {
+    outline: none !important;
+    background: #a4ddf1 !important;
+}
+.esri-ui .esri-popup .esri-popup__content {
+    padding-top: 10px;
 }
 .infoPanel .innerTab h2{
     font-size: 1.2rem;
@@ -922,10 +945,10 @@ padding-right: 30px;
 .footerGrid .footer-result .box ul{
     padding: 0;
     margin: 0;
-    max-height: 140px;
+    max-height: 110px;
     overflow: auto;
     border-radius: 0 0 15px 15px;
-    min-height: 140px;
+    min-height: 110px;
 }
 .footerGrid .footer-result .box ul li {
     display: inline-block;
@@ -989,4 +1012,20 @@ padding-right: 30px;
     .navbar .textLogo img {
         width: 40px;
     }
+}
+@media only screen and (min-device-width: 480px) and (max-device-width: 676px) {
+    .searchBox {    
+        max-width: calc(100% - 130px);
+    }
+    .right-tabs .nav:before {
+        top: -14px;
+    }
+    .right-tabs .nav:after {
+        bottom: -14px;
+    }
+    .rightOverlay {
+        width: 280px;
+        margin-right: -270px;
+    }
+    
 }
