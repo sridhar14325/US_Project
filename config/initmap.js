@@ -82,22 +82,18 @@
             for (var i = 0; i < urlparms.length; i++) { keyval = urlparms[i].split('='); parms[keyval[0]] = keyval[1]; }
             if (parms["extent"] && parms["locator"]) {
                 var pointer = parms["locator"].split(",");
-                var mapPoint = new Point(parseFloat(pointer[0]), parseFloat(pointer[1]), configOptions.Global.activeView.spatialReference);
+                var mapPoint = new Point(parseFloat(pointer[0]), parseFloat(pointer[1]), new SpatialReference({ wkid: 3857 }));
                 topic.publish("initmap-Search/inputqry", mapPoint);
+                var extval = parms["extent"].split(",");
+                var mapextent = new Extent(parseFloat(extval[0]), parseFloat(extval[1]), parseFloat(extval[2]), parseFloat(extval[3]), new SpatialReference({ wkid: 3857 }));
+                configOptions.Global.activeView.extent = mapextent;
             }
             else if (parms["extent"]) {
                 var extval = parms["extent"].split(",");
-                var mapextent = new Extent(parseFloat(extval[0]), parseFloat(extval[1]), parseFloat(extval[2]), parseFloat(extval[3]), configOptions.Global.activeView.spatialReference);
-                configOptions.Global.activeView.set("extent", mapextent);
+                var mapextent = new Extent(parseFloat(extval[0]), parseFloat(extval[1]), parseFloat(extval[2]), parseFloat(extval[3]), new SpatialReference({ wkid: 3857 }));
+                configOptions.Global.activeView.extent = mapextent;
             }
         }
-
-
-        //xmax: -8911372.852789475
-        //xmin: -9105522.904633896
-        //ymax: 4047379.2483999664
-        //ymin: 3965438.754078226
-
         //xmin, ymin, xmax, ymax
 
         /*

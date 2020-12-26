@@ -8,7 +8,7 @@
     "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Graphic", "esri/symbols/PictureMarkerSymbol",
     "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/tasks/support/Query",
     "esri/tasks/RouteTask", "esri/tasks/support/RouteParameters", "esri/tasks/support/FeatureSet",
-    "esri/layers/GraphicsLayer",
+    "esri/layers/GraphicsLayer", "esri/PopupTemplate",
     "dojo/text!widgets/IdentifyQuery/templates/IdentifyQuery.html"],
     function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
         units, Color, geometryEngine,
@@ -16,7 +16,7 @@
         SimpleLineSymbol, SimpleFillSymbol, Graphic, PictureMarkerSymbol,
         IdentifyTask, IdentifyParameters, Query,
         RouteTask, RouteParameters, FeatureSet,
-        GraphicsLayer,
+        GraphicsLayer, PopupTemplate,
         template) {
 
         var IdentifyQuerywidget = declare("widgets.IdentifyQuery", [_WidgetBase, _TemplatedMixin], {
@@ -83,22 +83,31 @@
             executeIdentificationTask: function (inputqry) {
                 var currentWidget = this;
                 try {
+
                     //var cGeometry = webMercatorUtils.webMercatorToGeographic(inputqry);
                     //var bufferGeometry = geometryEngine.geodesicBuffer(inputqry, currentWidget.Oconfig.BufferDistance, currentWidget.Oconfig.DistanceType);
-                    var union = geometryEngine.union(currentWidget.areaBoundaries);
+
 
                     //var sfs = new SimpleFillSymbol(); var polygonGraphic = new Graphic({ geometry: union, symbol: sfs });
                     //currentWidget.thisRouteLayer.add(polygonGraphic);
                     var identyForms = new IdentifyParameters();
-                    identyForms.geometry = union;
+
                     identyForms.layerIds = currentWidget.Pconfig.MapService.SubLayers;
                     identyForms.tolerance = 3;
                     identyForms.layerOption = "all";
                     identyForms.mapExtent = configOptions.Global.activeView.extent;
                     identyForms.returnGeometry = true;
 
-                    currentWidget.thisIdentifyTask.execute(identyForms)
-                        .then(function (res) { currentWidget.iTaskExecutes(inputqry, res, currentWidget.Oconfig.DistanceType); }, function (er) { console.log(er); });
+                    var callareaboundary = setInterval(function () {
+                        if (currentWidget.areaBoundaries.length) {
+                            clearInterval(callareaboundary);
+                            var union = geometryEngine.union(currentWidget.areaBoundaries);
+                            identyForms.geometry = union;
+                            currentWidget.thisIdentifyTask.execute(identyForms)
+                                .then(function (res) { currentWidget.iTaskExecutes(inputqry, res, currentWidget.Oconfig.DistanceType); }, function (er) { console.log(er); });
+                        }
+                    }, 200);
+
                 } catch (e) {
                     console.log("[executeIdentificationTsk] failed: " + e);
                 }
