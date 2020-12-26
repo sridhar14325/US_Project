@@ -5,7 +5,7 @@
     "esri/core/units", "esri/Color",
     "esri/geometry/geometryEngine",
     "esri/geometry/SpatialReference", "esri/geometry/projection", "esri/geometry/support/webMercatorUtils",
-    "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Graphic",
+    "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Graphic", "esri/symbols/PictureMarkerSymbol",
     "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/tasks/support/Query",
     "esri/tasks/RouteTask", "esri/tasks/support/RouteParameters", "esri/tasks/support/FeatureSet",
     "esri/layers/GraphicsLayer",
@@ -13,7 +13,7 @@
     function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
         units, Color, geometryEngine,
         SpatialReference, Projection, webMercatorUtils,
-        SimpleLineSymbol, SimpleFillSymbol, Graphic,
+        SimpleLineSymbol, SimpleFillSymbol, Graphic, PictureMarkerSymbol,
         IdentifyTask, IdentifyParameters, Query,
         RouteTask, RouteParameters, FeatureSet,
         GraphicsLayer,
@@ -170,12 +170,17 @@
                         content: infoContent
                     }
                     // Create a symbol for drawing the point
+                    //var markerSymbol = {
+                    //    type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                    //    color: [226, 119, 40, 1],
+                    //    size: 1
+                    //};
                     var markerSymbol = {
-                        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-                        color: [226, 119, 40, 1],
-                        size: 1
+                        type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+                        url: "images/loader_Point.gif",
+                        width: "64px",
+                        height: "64px"
                     };
-
                     // Create a graphic and add the geometry and symbol to it
                     var pointGraphic = new Graphic({
                         geometry: pG,
@@ -192,6 +197,13 @@
                     currentWidget.Gconfig.activeView.popup.visible = true;
                     // go to the given point
                     currentWidget.Gconfig.activeView.goTo(pointGraphic);
+
+                    currentWidget.Gconfig.SearchPointer = pG.x + "," + pG.y;
+                    setTimeout(function () {
+                        var ext = configOptions.Global.activeView.extent;
+                        var extary = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
+                        currentWidget.Gconfig.SearchExtent = extary;
+                    }, 10);
 
                 } catch (e) {
                     console.log("[ResultsClickOut] failed: " + e);

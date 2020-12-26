@@ -42,6 +42,7 @@
                 try {
                     currentWidget.PrepareSearchUI();
                     topic.subscribe("Locator-Search/inputqry", function (qry) { currentWidget.thisSearch.search(qry); });
+                    topic.subscribe("initmap-Search/inputqry", function (qry) { currentWidget.thisSearch.search(qry); });
                 } catch (e) {
                     console.log(e);
                 }
@@ -81,6 +82,10 @@
                     currentWidget.thisSearch.sources = sources;
                     //on(currentWidget.thisSearch, "search-complete", function (res) { debugger; });
                     on(currentWidget.thisSearch, "select-result", function (res) { currentWidget.SearchResultsDisplay(res); });
+                    on(currentWidget.thisSearch, "select-clear", function (res) {
+                        currentWidget.Gconfig.SearchPointer = null;
+                        currentWidget.Gconfig.SearchExtent = null;
+                    });
                 } catch (e) {
                     console.log("[PrepareSearchUI] failed: " + e);
                 }
@@ -89,7 +94,13 @@
                 var currentWidget = this;
                 try {
                     //debugger;
-                    topic.publish("Search-IdentifyQuery/inputqry", qry.result.feature.get("geometry"));
+                    var geometry = qry.result.feature.geometry;
+                    topic.publish("Search-IdentifyQuery/inputqry", geometry);
+                    currentWidget.Gconfig.SearchPointer = geometry.x + "," + geometry.y;
+
+                    var ext = configOptions.Global.activeView.extent;
+                    var extary = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
+                    currentWidget.Gconfig.SearchExtent = extary;
                 } catch (e) {
                     console.log("[SearchResultsDisplay] failed: " + e);
                 }

@@ -93,7 +93,6 @@
                 try {
                     currentWidget.Gconfig.activeView.on("click", function (evt) {
                         var mapPoint = new Point(evt.mapPoint.x, evt.mapPoint.y, currentWidget.Gconfig.activeView.spatialReference);
-
                         var count = 0;
                         var intervl = setInterval(function () {
                             if (currentWidget.Gconfig.activeView.popup.selectedFeature) { clearInterval(intervl); } else {

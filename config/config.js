@@ -101,12 +101,23 @@ configOptions = {
         // ------------------------------------------------------------------------------------------------------------------------
         // Set URL for routing service (network analyst).
         RouteServiceURL: "https://gis.dhec.sc.gov/arcgis/rest/services/protected/Network/NAServer",
-        InfoWindoContent: "",
+        SearchPointer: null,
+        SearchExtent: null,
     },
     widgets: {
         Help: {
             id: "Widget_Help",
             options: {
+            }
+        },
+        Share: {
+            id: "Widget_Share",
+            options: {
+                TinyURLServiceURL: "https://api.bit.ly/v3/shorten?login=esri&apiKey=R_65fd9891cd882e2a96b99d4bda1be00e&uri=${0}&format=json",
+                TinyURLResponseAttribute: "data.url",
+                FacebookShareURL: "https://www.facebook.com/sharer.php?u=${0}&t=Public%20Notice%20Finder",
+                TwitterShareURL: "https://mobile.twitter.com/compose/tweet?status=Public%20Notice%20Finder ${0}",
+                ShareByMailLink: "mailto:%20?subject=Public%20Notice%20Finder&body=${0}"
             }
         },
         BaseMapGallery: {

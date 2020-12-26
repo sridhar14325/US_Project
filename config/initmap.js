@@ -1,10 +1,10 @@
-﻿require(["dojo/parser", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
+﻿require(["dojo/parser", "dojo/topic", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
     "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator", "widgets/Search/Search", "widgets/Layers/Layers",
-    "widgets/Help/Help", "widgets/IdentifyQuery/IdentifyQuery",
-    "esri/geometry/SpatialReference",
-    "dojo/domReady!"], function (Parser, Map, MapView, SceneView, Extent,
-        BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help, Cust_IdentifyQuery,
-        SpatialReference) {
+    "widgets/Help/Help", "widgets/IdentifyQuery/IdentifyQuery", "widgets/Share/Share",
+    "esri/geometry/SpatialReference", "esri/geometry/Point",
+    "dojo/domReady!"], function (Parser, topic, Map, MapView, SceneView, Extent,
+        BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help, Cust_IdentifyQuery, Cust_Share,
+        SpatialReference, Point) {
 
         var map = new Map({ basemap: configOptions.Global.ApplicationBaseMap });
         configOptions.Global.currentMap = map;
@@ -53,6 +53,13 @@
             });
             cust_identifyQuery.startup();
 
+            //Installing IdentifyQuery widget for get qury bottom inputs
+            var cust_share = new Cust_Share({
+                map: map, Gconfig: configOptions.Global,
+                Pconfig: configOptions.widgets.Share.options,
+            });
+            cust_share.startup();
+
         };
         // Set the extent on the view
         var ext = configOptions.Global.DefaultExtent.split(",");
@@ -65,9 +72,33 @@
         configOptions.Global.activeView.when(function (result) {
             //Installing widgets after loading the map view
             initializeWidgets();
+            loadSharableView();
         }, function (er) { console.log(er); });
 
-       
+        function loadSharableView() {
+            //Read a page's GET URL variables and return them as an associative array.
+            var parms = {}, hash;
+            var urlparms = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < urlparms.length; i++) { keyval = urlparms[i].split('='); parms[keyval[0]] = keyval[1]; }
+            if (parms["extent"] && parms["locator"]) {
+                var pointer = parms["locator"].split(",");
+                var mapPoint = new Point(parseFloat(pointer[0]), parseFloat(pointer[1]), configOptions.Global.activeView.spatialReference);
+                topic.publish("initmap-Search/inputqry", mapPoint);
+            }
+            else if (parms["extent"]) {
+                var extval = parms["extent"].split(",");
+                var mapextent = new Extent(parseFloat(extval[0]), parseFloat(extval[1]), parseFloat(extval[2]), parseFloat(extval[3]), configOptions.Global.activeView.spatialReference);
+                configOptions.Global.activeView.set("extent", mapextent);
+            }
+        }
+
+
+        //xmax: -8911372.852789475
+        //xmin: -9105522.904633896
+        //ymax: 4047379.2483999664
+        //ymin: 3965438.754078226
+
+        //xmin, ymin, xmax, ymax
 
         /*
        // create 3D view, won't initialize until container is set
