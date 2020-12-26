@@ -198,11 +198,13 @@
                     // go to the given point
                     currentWidget.Gconfig.activeView.goTo(pointGraphic);
 
-                    currentWidget.Gconfig.SearchPointer = pG.x + "," + pG.y;
+                    var SearchPointer = pG.x + "," + pG.y;
                     setTimeout(function () {
+                        //sending point and extent for sharing.
                         var ext = configOptions.Global.activeView.extent;
-                        var extary = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
-                        currentWidget.Gconfig.SearchExtent = extary;
+                        var SearchExtent = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
+                        topic.publish("Search-Share/extent_Point", SearchPointer, SearchExtent);
+
                     }, 10);
 
                 } catch (e) {

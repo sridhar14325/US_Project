@@ -1,10 +1,10 @@
-﻿define(["dojo/dom", "dojo/on",
+﻿define(["dojo/dom", "dojo/on", "dojo/topic",
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
 
     "dojo/text!widgets/Share/templates/Share.html"],
-    function (dom, on, declare, _WidgetBase, _TemplatedMixin,
+    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
 
         template) {
 
@@ -15,7 +15,8 @@
             map: null,
             //theme: "HomeButton",
             //baseClass: "Navigation",
-
+            SearchPointer: null,
+            SearchExtent: null,
 
             constructor: function (params, srcNodeRef) {
                 params = params || {};
@@ -24,7 +25,6 @@
                 } catch (e) {
                     console.log(e);
                 }
-
             },
             postCreate: function () {
                 // Get a DOM node reference for the root of our widget
@@ -39,20 +39,57 @@
             startup: function () {
                 var currentWidget = this;
                 try {
-                    on(dom.byId("v-pills-three-tab"), "click", function () {
+                    topic.subscribe("Search-Share/extent_Point", function (SearchPointer, SearchExtent) {
+                        currentWidget.SearchPointer = SearchPointer;
+                        currentWidget.SearchExtent = SearchExtent;
+                    });
+                    on(dom.byId("FaceBookSharing_btn"), "click", function () {
                         //var ed = "-9200610.567820527,3917283.426258621,-8812310.464132018,4081164.4149019597";
-                        var curext = configOptions.Global.activeView.extent;
-                        var extary = curext.xmin + "," + curext.ymin + "," + curext.xmax + "," + curext.ymax;
-                        var ext = currentWidget.Gconfig.SearchExtent ? "?extent=" + currentWidget.Gconfig.SearchExtent : "?extent=" + extary;
-                        var loc = currentWidget.Gconfig.SearchPointer ? "&locator=" + currentWidget.Gconfig.SearchPointer : "";
 
-                        var Hashlocat = window.location.toString().split("#");
-                        var queslocat = Hashlocat[0].split("?");
-                        var sharedURL = queslocat + ext + loc;
-                        console.log(sharedURL);
                     });
                 } catch (e) {
                     console.log(e);
+                }
+            },
+            _FacebookSharing: function () {
+                var currentWidget = this;
+                try {
+                    var url = currentWidget.FormatURL();
+                } catch (e) {
+                    console.log("[_FacebookSharing] failed: " + e);
+                }
+            },
+            _TwetterSharing: function () {
+                var currentWidget = this;
+                try {
+                    var url = currentWidget.FormatURL();
+                } catch (e) {
+                    console.log("[_TwetterSharing] failed: " + e);
+                }
+            },
+            _CurrentExtentSharing: function () {
+                var currentWidget = this;
+                try {
+                    var url = currentWidget.FormatURL();
+                } catch (e) {
+                    console.log("[_CurrentExtentSharing] failed: " + e);
+                }
+            },
+            FormatURL: function () {
+                var currentWidget = this;
+                try {
+                    var curext = configOptions.Global.activeView.extent;
+                    var extary = curext.xmin + "," + curext.ymin + "," + curext.xmax + "," + curext.ymax;
+                    var ext = currentWidget.SearchExtent ? "?extent=" + currentWidget.SearchExtent : "?extent=" + extary;
+                    var loc = currentWidget.SearchPointer ? "&locator=" + currentWidget.SearchPointer : "";
+
+                    var Hashlocat = window.location.toString().split("#");
+                    var queslocat = Hashlocat[0].split("?");
+                    var sharedURL = queslocat + ext + loc;
+                    //console.log(sharedURL);
+                    return sharedURL;
+                } catch (e) {
+                    console.log("[FormatURL] failed: " + e);
                 }
             },
             // Below function use to activate the button functionalaties

@@ -57,7 +57,7 @@
             var cust_share = new Cust_Share({
                 map: map, Gconfig: configOptions.Global,
                 Pconfig: configOptions.widgets.Share.options,
-            });
+            }, configOptions.widgets.Share.id);
             cust_share.startup();
 
         };
