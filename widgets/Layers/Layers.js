@@ -1,10 +1,10 @@
-﻿define(["dojo/dom", "dojo/on", "dojo/topic",
+﻿define(["dojo/dom", "dojo/on", "dojo/topic", "dojo/mouse",
     "dojo/_base/declare",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
     "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/tasks/support/Query", "esri/PopupTemplate",
     "dojo/text!widgets/Layers/templates/Layers.html"],
-    function (dom, on, topic, declare, _WidgetBase, _TemplatedMixin,
+    function (dom, on, topic, mouse, declare, _WidgetBase, _TemplatedMixin,
         MapImageLayer, FeatureLayer, Query, PopupTemplate,
         template) {
 
@@ -49,7 +49,7 @@
                 try {
                     var servSet = currentWidget.Pconfig.MapService;
                     var popuptemplate = new PopupTemplate("Location", "Street: ${ADDRESS}");
-                    
+
                     var sublayers = [
                         {
                             id: 5,
@@ -111,7 +111,7 @@
                             }
                         }
                     ];
-                    var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid });
+                    var Baselayer = new FeatureLayer({ url: servSet.BaseSericeUrl, id: servSet.Baseid, blendMode: "normal" });
                     var Servicelayer = new MapImageLayer({ url: servSet.ServiceUrl, id: servSet.Serviceid, sublayers: sublayers });
 
                     Baselayer.load().then(function (evt) {
@@ -124,7 +124,7 @@
                                 }
                                 topic.publish("Layers-IdentifyQuery/areapolygons", graphics);
                             });
-                    }, function (er) { console.log(er); });;
+                    }, function (er) { console.log(er); });
                     currentWidget.map.add(Baselayer);
                     currentWidget.map.add(Servicelayer);
                 } catch (e) {

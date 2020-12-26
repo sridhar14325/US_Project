@@ -67,6 +67,8 @@
             initializeWidgets();
         }, function (er) { console.log(er); });
 
+       
+
         /*
        // create 3D view, won't initialize until container is set
        initialViewParams.container = null;

@@ -81,7 +81,7 @@
                         var cMapPoint = webMercatorUtils.geographicToWebMercator(mapPoint);
                         currentWidget.thisAddressLocator.locationToAddress({ location: cMapPoint }, 100)
                             .then(function (res) { currentWidget.LocateLocator(res, "GPSClick", cMapPoint); },
-                            function (er) { console.log(er); });
+                                function (er) { console.log(er); });
                     });
 
                 } catch (e) {
@@ -93,9 +93,19 @@
                 try {
                     currentWidget.Gconfig.activeView.on("click", function (evt) {
                         var mapPoint = new Point(evt.mapPoint.x, evt.mapPoint.y, currentWidget.Gconfig.activeView.spatialReference);
-                        currentWidget.thisAddressLocator.locationToAddress({ location: mapPoint }, 100)
-                            .then(function (res) { currentWidget.LocateLocator(res, "MapClick", mapPoint); },
-                            function (er) { console.log(er); });
+
+                        var count = 0;
+                        var intervl = setInterval(function () {
+                            if (currentWidget.Gconfig.activeView.popup.selectedFeature) { clearInterval(intervl); } else {
+                                if (count > 5) {
+                                    clearInterval(intervl);
+                                    currentWidget.thisAddressLocator.locationToAddress({ location: mapPoint }, 100)
+                                        .then(function (res) { currentWidget.LocateLocator(res, "MapClick", mapPoint); },
+                                            function (er) { console.log(er); });
+                                }
+                                count++;
+                            }
+                        }, 200);
                     });
                 } catch (e) {
                     console.log("[PrepareMapClick] failed: " + e);
