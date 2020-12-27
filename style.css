@@ -72,7 +72,9 @@ body, html {
     border-right: 15px solid #80b8d4;
     margin-right: 30px;
 }
-
+.main-logo img{
+    width: 116px;
+}
     .main-logo:after {
         content: '';
         width: 15px;
@@ -613,7 +615,7 @@ display:block;
     display: flex;
     flex-direction: column;
     z-index: 99;
-    height: calc(100vh - 74px);
+    height: calc(100vh - 71px);
 }
     /* .rightOverlay .contentBox {
     overflow: auto;
@@ -891,12 +893,12 @@ z-index: 99;
     left: 15px;
     right: 0;
     bottom: 15px;
-    height: 250px;
+    height: 232px;
     display: flex;
     flex-direction: column;
     z-index: 999;
-    background: #fff;
-    margin-bottom: -265px;
+    background: #ffffff;
+    margin-bottom: -247px;
     transition: 0.5s all ease;
     width: calc(100% - 30px);
     border-radius: 10px;
@@ -920,42 +922,42 @@ z-index: 99;
         border: 0;
         color: #ffffff;
         font-size: 2rem;
-        line-height: 1rem;
+        line-height: 0.3rem !important;
         outline: none;
-        padding: 2px;
-        box-shadow: 0 -2px 3px rgba(0,0,0,0.2);
+        padding: 0;
+        /* box-shadow: 0 -2px 3px rgba(0,0,0,0.2); */
     }
 
         .footerGrid .footerGridToggleBtn:before {
             content: '';
-            width: 20px;
+            width: 16px;
             height: 100%;
             display: inline-block;
             border-radius: 5px 0 0 0;
-            left: -13px;
+            left: -10px;
             z-index: 99;
             position: absolute;
             background: #00b6d6;
             transform: skew(-19deg, 0deg);
             top: 0;
             pointer-events: none;
-            box-shadow: -3px -1px 3px rgba(0,0,0,0.2);
+            /* box-shadow: -3px -1px 3px rgba(0,0,0,0.2); */
         }
 
         .footerGrid .footerGridToggleBtn:after {
             content: '';
-            width: 20px;
+            width: 16px;
             height: 100%;
             display: inline-block;
             border-radius: 0 5px 0 0;
-            right: -13px;
+            right: -10px;
             z-index: 99;
             position: absolute;
             background: #00b6d6;
             transform: skew(19deg, 0deg);
             top: 0;
             pointer-events: none;
-            box-shadow: 3px -1px 3px rgba(0,0,0,0.2);
+            /* box-shadow: 3px -1px 3px rgba(0,0,0,0.2); */
         }
 
     .footerGrid .header {
