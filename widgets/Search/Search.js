@@ -86,6 +86,7 @@
                         currentWidget.Gconfig.SearchPointer = null;
                         currentWidget.Gconfig.SearchExtent = null;
                     });
+                    setTimeout(function () { $("#locatorabtn").click(); }, 100);//After search widget loading done, default location will call in map
                 } catch (e) {
                     console.log("[PrepareSearchUI] failed: " + e);
                 }

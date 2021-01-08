@@ -129,8 +129,10 @@
                         atag.dataset["OBJECTID"] = features[i]["feature"]["attributes"]["OBJECTID"];
                         atag.dataset["geometry"] = JSON.stringify(features[i]["feature"]["geometry"]);
                         atag.dataset["attributes"] = JSON.stringify(features[i]["feature"]["attributes"]);
+                        var distanceVal = Number(geometryEngine.distance(FromPoint, features[i]["feature"]["geometry"], dType).toFixed(2));
+                        litag.dataset["distval"] = distanceVal;
                         atag.href = "#";
-                        atag.innerHTML = features[i]["feature"]["attributes"]["SiteName"] + " (" + geometryEngine.distance(FromPoint, features[i]["feature"]["geometry"], dType).toFixed(2) + " " + dType + ")";
+                        atag.innerHTML = features[i]["feature"]["attributes"]["SiteName"] + " (" + distanceVal + " " + dType + ")";
                         litag.appendChild(atag);
                         if (features[i]["layerName"] == "ALL") { domALLid.appendChild(litag); }
                         else if (features[i]["layerName"] == "WATER") { domWATERid.appendChild(litag); }
@@ -140,6 +142,18 @@
                         else if (features[i]["layerName"] == "OCRM") { domOCRMid.appendChild(litag); }
                         else { console.log("Unknown Data"); }
                     }
+                    var arylistid = "ul_ALL,ul_SPN,ul_AQ,ul_LW,ul_OC,ul_BW".split(",");
+                    for (i = 0; i < arylistid.length; i++) { soruUI(arylistid[i]); }
+                    function soruUI(DIVID) {
+                        Array.from(document.getElementById(DIVID).querySelectorAll("li[data-distval]")).sort(function (a, b) {
+                            a = a.getAttribute("data-distval");
+                            b = b.getAttribute("data-distval");
+                            return a.localeCompare(b);
+                        }).forEach(function (node) {
+                            node.parentNode.appendChild(node);
+                        });
+                    }
+
                     dojo.query("#ul_ALL a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
                     dojo.query("#ul_SPN a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
                     dojo.query("#ul_AQ a").forEach(function (aNode) { on(aNode, "click", function (evt) { currentWidget.ResultsClickOut(evt); }); });
