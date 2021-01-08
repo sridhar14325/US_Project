@@ -96,11 +96,11 @@
                     //debugger;
                     var geometry = qry.result.feature.geometry;
                     topic.publish("Search-IdentifyQuery/inputqry", geometry);
-                    currentWidget.Gconfig.SearchPointer = geometry.x + "," + geometry.y;
-
+                    //sending point and extent for sharing.
+                    var SearchPointer = geometry.x + "," + geometry.y;
                     var ext = configOptions.Global.activeView.extent;
-                    var extary = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
-                    currentWidget.Gconfig.SearchExtent = extary;
+                    var SearchExtent = ext.xmin + "," + ext.ymin + "," + ext.xmax + "," + ext.ymax;
+                    topic.publish("Search-Share/extent_Point", SearchPointer, SearchExtent);
                 } catch (e) {
                     console.log("[SearchResultsDisplay] failed: " + e);
                 }
