@@ -1,13 +1,14 @@
 ﻿require(["dojo/parser", "dojo/topic", "esri/Map", "esri/views/MapView", "esri/views/SceneView", "esri/geometry/Extent",
     "widgets/BaseMapGallery/BaseMapGallery", "widgets/Locator/Locator", "widgets/Search/Search", "widgets/Layers/Layers",
     "widgets/Help/Help", "widgets/IdentifyQuery/IdentifyQuery", "widgets/Share/Share",
-    "esri/geometry/SpatialReference", "esri/geometry/Point",
+    "esri/geometry/SpatialReference", "esri/geometry/Point", "esri/widgets/Compass",
     "dojo/domReady!"], function (Parser, topic, Map, MapView, SceneView, Extent,
         BaseMapGallery, Cust_Locator, Cust_Search, Cust_Layers, Cust_Help, Cust_IdentifyQuery, Cust_Share,
-        SpatialReference, Point) {
+        SpatialReference, Point, Compass) {
 
         var map = new Map({ basemap: configOptions.Global.ApplicationBaseMap });
         configOptions.Global.currentMap = map;
+
 
         function initializeWidgets() {
             //Installing BaseMap Gallery widget
@@ -75,6 +76,11 @@
             loadSharableView();
         }, function (er) { console.log(er); });
 
+
+        var compass = new Compass({
+            view: configOptions.Global.activeView
+        });
+        configOptions.Global.activeView.ui.add(compass, "top-left");
         function loadSharableView() {
             //Read a page's GET URL variables and return them as an associative array.
             var parms = {}, hash;
