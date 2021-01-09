@@ -1,10 +1,34 @@
 ﻿<div class="innerTab">
-    <div>
-        <div>
-            Compose E-Mail section.
+    <!-- <div> -->
+    <form class="share-form">
+        <div class="form-row mb-3">
+            <label for="to" class="col-form-label">To:</label>
+            <input type="email" class="form-control" id="to" placeholder="Type email">
         </div>
-        <button class="share-btn" id="FaceBookSharing_btn" data-dojo-attach-event="onclick:_FacebookSharing">Facebook Sharing</button>
-        <button class="share-btn" id="TwetterSharing_btn" data-dojo-attach-event="onclick:_TwetterSharing">Twitter Sharing</button>
-        <button class="share-btn" id="OnlyExtentSharing_btn" data-dojo-attach-event="onclick:_CurrentExtentSharing">Current Extent Sharing</button>
-    </div>
+        <div class="form-row mb-3">
+            <label for="Subject" class="col-form-label">CC:</label>
+            <input type="email" class="form-control" id="Subject" placeholder="Type email">
+        </div>
+        <div class="form-row mb-3">
+            <label for="message" class="col-form-label">message:</label>
+            <textarea type="email" class="form-control" id="message" placeholder="Type message"></textarea>
+        </div>
+        <div class="btn-section">
+            <label>Share:</label>
+            <div class=" btns">
+                <button class=" share-btn" id="FaceBookSharing_btn" data-dojo-attach-event="onclick:_FacebookSharing"><i
+                        class="fab fa-facebook-square"></i></button>
+                <button class="share-btn" id="TwetterSharing_btn" data-dojo-attach-event="onclick:_TwetterSharing"><i
+                        class="fab fa-instagram-square"></i></button>
+                <button class="share-btn" id="TwetterInstagram_btn" data-dojo-attach-event="onclick:_IntagramSharing">
+                    <i class="fab fa-twitter-square"></i></button>
+
+
+            </div>
+            <button class="share-btn" id="OnlyExtentSharing_btn"
+                data-dojo-attach-event="onclick:_CurrentExtentSharing">Current Extent Sharing</button>
+        </div>
+    </form>
+
+    <!-- </div> -->
 </div>

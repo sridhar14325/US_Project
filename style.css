@@ -1075,6 +1075,17 @@ z-index: 99;
                 outline: none;
             }
 
+            /* Share Css */
+            .share-form{
+                font-size: 13px;
+            }
+            .share-form .form-control {
+                border: 0;
+                border-bottom: 1px solid #aaa;
+                border-radius: 0;
+                box-shadow: none;
+                font-size: 14px;
+            }
 @media only screen and (max-width: 991px) {
     .main-logo {
         height: calc(100% + 1px);
