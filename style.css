@@ -874,8 +874,8 @@ z-index: 99;
     width: calc(100% - 40px);
     margin-left: 20px;
     padding-top: 40px;
-    border-top: 7px solid #df134c;
-    color: #999;
+    border-top: 7px solid #005d91;
+    color: #000;
 }
 
     #desclaimer.design2 .modal-dialog .modal-body p {

@@ -75,6 +75,14 @@
                     console.log("[_CurrentExtentSharing] failed: " + e);
                 }
             },
+            _IntagramSharing: function () {
+                var currentWidget = this;
+                try {
+                    var url = currentWidget.FormatURL();
+                } catch (e) {
+                    console.log("[_IntagramSharing] failed: " + e);
+                }
+            },
             FormatURL: function () {
                 var currentWidget = this;
                 try {
